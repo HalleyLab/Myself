@@ -142,6 +142,8 @@ document.addEventListener('DOMContentLoaded', function() {
         '\u8BFE\u7A0B\u6750\u6599': 'Course Materials',
         '\u5168\u90E8\u8BFE\u7A0B': 'All Courses',
         '\u8BFE\u7A0B\u7C7B\u522B': 'Course Categories',
+        '\u4E13\u4E1A\u57FA\u7840': 'Foundation Courses',
+        '\u8BFE\u7A0B\u5217\u8868': 'Course List',
         '\u641C\u7D22\u8BFE\u7A0B\u6216\u77E5\u8BC6\u70B9': 'Search courses or topics',
         '\u8BFE\u7A0B\u6982\u62EC': 'Course Overview',
         '\u5B66\u4E60\u5FC3\u5F97\u4E0E\u6280\u5DE7': 'Study Experience and Tips',
@@ -491,6 +493,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const core = text.trim().replace(/\s+/g, ' ');
         if (!core) {
             return text;
+        }
+        const courseCount = core.match(/^(\d+) \u95E8\u8BFE\u7A0B$/);
+        if (courseCount) {
+            return leading + courseCount[1] + (courseCount[1] === '1' ? ' course' : ' courses') + trailing;
         }
         const completeTranslations = window.siteEnglishTranslations || {};
         if (exactTranslations[core] || completeTranslations[core]) {
