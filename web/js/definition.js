@@ -63,10 +63,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const textMemory = new WeakMap();
     const attrMemory = new WeakMap();
     const languageKey = 'siteLanguage';
-    const originalDocumentTitle = document.title;
-    const translationScriptUrl = new URL('js/translations-en.js', window.location.href).href;
+    let titleMemory;
+    const translationScriptUrl = new URL('translations-en.js?v=20261012', document.querySelector('script[src*="/definition.js"]').src).href;
     let translationLoadPromise = null;
     let languageChangeId = 0;
+    let translationTerms;
     const exactTranslations = {
         '\u4E2A\u4EBA\u5206\u4EAB': 'Personal Sharing',
         '\u9996\u9875': 'Home',
@@ -281,6 +282,7 @@ document.addEventListener('DOMContentLoaded', function() {
             '.language-switcher:hover{transform:translateY(-1px);background:rgba(10,12,14,.96)}',
             '.dark-theme .language-switcher{background:rgba(245,246,248,.92);color:#181a1d}',
             '.dark-theme .language-switcher:hover{background:#fff}',
+            'html[lang="en"] #tab0 > p:nth-of-type(2)::before{content:"Course overview"!important}',
             '@media (prefers-reduced-motion:reduce){.theme-switcher,.language-switcher{animation:none}}',
             '@media (max-width:720px){.language-switcher{top:74px;right:16px}}'
         ].join('');
@@ -295,21 +297,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         document.body.appendChild(button);
 
-        const buttonObserver = new MutationObserver(function() {
-            updateLanguageButton(getStoredLanguage() === 'en', false);
-        });
-        buttonObserver.observe(button, {
-            childList: true,
-            characterData: true,
-            subtree: true
-        });
     }
 
     function setLanguage(language) {
         const isEnglish = language === 'en';
         const currentChangeId = ++languageChangeId;
-        document.body.dataset.siteLanguage = language;
-        document.documentElement.lang = isEnglish ? 'en' : 'zh-CN';
         localStorage.setItem(languageKey, language);
         updateLanguageButton(isEnglish, isEnglish && !window.siteEnglishTranslations);
 
@@ -325,13 +317,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }).catch(function(error) {
             console.warn('English translation dictionary could not be loaded.', error);
             if (currentChangeId === languageChangeId && getStoredLanguage() === 'en') {
-                updateLanguageButton(true, false);
+                localStorage.setItem(languageKey, document.body.dataset.siteLanguage || 'zh');
+                updateLanguageButton(getStoredLanguage() === 'en', false);
+                document.querySelector('.language-switcher').title = 'Unable to load English. Please try again.';
             }
         });
     }
 
     function synchronizeLanguageUi() {
-        setLanguage(getStoredLanguage());
+        if (document.body.dataset.siteLanguage !== getStoredLanguage()) {
+            setLanguage(getStoredLanguage());
+        }
     }
 
     function getStoredLanguage() {
@@ -349,8 +345,20 @@ document.addEventListener('DOMContentLoaded', function() {
         translationLoadPromise = new Promise(function(resolve, reject) {
             const script = document.createElement('script');
             script.src = translationScriptUrl;
-            script.onload = resolve;
-            script.onerror = reject;
+            script.onload = function() {
+                if (window.siteEnglishTranslations) {
+                    resolve();
+                } else {
+                    translationLoadPromise = null;
+                    script.remove();
+                    reject(new Error('English dictionary is missing.'));
+                }
+            };
+            script.onerror = function(error) {
+                translationLoadPromise = null;
+                script.remove();
+                reject(error);
+            };
             document.head.appendChild(script);
         });
         return translationLoadPromise;
@@ -358,6 +366,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function applyLanguage(language) {
         const isEnglish = language === 'en';
+        document.body.dataset.siteLanguage = language;
+        document.documentElement.lang = isEnglish ? 'en' : 'zh-CN';
         translateTextNodes(isEnglish);
         translateAttributes(isEnglish);
         updateDocumentTitle(isEnglish);
@@ -371,14 +381,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }));
     }
 
-    function translateTextNodes(isEnglish) {
-        const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    window.translateSiteText = translateText;
+
+    function translateTextNodes(isEnglish, root) {
+        const walker = document.createTreeWalker(root || document.body, NodeFilter.SHOW_TEXT, {
             acceptNode: function(node) {
                 const parent = node.parentElement;
                 if (!parent || !node.nodeValue.trim()) {
                     return NodeFilter.FILTER_REJECT;
                 }
-                if (parent.closest('script, style, code, pre, textarea, svg, .language-switcher, .site-search-results')) {
+                if (parent.closest('head, script, style, textarea, .language-switcher, .site-search-results, .multiple-text, .typed-cursor')) {
                     return NodeFilter.FILTER_REJECT;
                 }
                 return NodeFilter.FILTER_ACCEPT;
@@ -390,37 +402,43 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         nodes.forEach(function(node) {
-            if (!textMemory.has(node)) {
-                textMemory.set(node, restoreChineseText(node.nodeValue));
-            }
-            const original = textMemory.get(node);
-            node.nodeValue = isEnglish ? translateText(original) : original;
+            const record = localizeValue(textMemory.get(node), node.nodeValue, isEnglish);
+            textMemory.set(node, record);
+            if (node.nodeValue !== record.last) node.nodeValue = record.last;
         });
     }
 
-    function translateAttributes(isEnglish) {
-        Array.from(document.querySelectorAll('[placeholder], [title], [alt], [aria-label]')).forEach(function(el) {
-            if (el.closest('.language-switcher, .site-search')) {
+    function translateAttributes(isEnglish, root) {
+        const elements = root ? [root].concat(Array.from(root.querySelectorAll('*'))) : Array.from(document.querySelectorAll('[placeholder], [title], [alt], [aria-label], [aria-valuetext], [data-tooltip], input[type="button"], input[type="submit"], input[type="reset"]'));
+        elements.forEach(function(el) {
+            if (el.closest('.language-switcher') || (el.closest('.site-search') && el.id !== 'noteSearch')) {
                 return;
             }
             if (!attrMemory.has(el)) {
                 attrMemory.set(el, {});
             }
             const stored = attrMemory.get(el);
-            ['placeholder', 'title', 'alt', 'aria-label'].forEach(function(attr) {
+            const attributes = ['placeholder', 'title', 'alt', 'aria-label', 'aria-valuetext', 'data-tooltip'];
+            if (el.matches('input[type="button"], input[type="submit"], input[type="reset"]')) attributes.push('value');
+            attributes.forEach(function(attr) {
                 if (!el.hasAttribute(attr)) {
                     return;
                 }
-                if (!stored[attr]) {
-                    stored[attr] = restoreChineseText(el.getAttribute(attr));
-                }
-                el.setAttribute(attr, isEnglish ? translateText(stored[attr]) : stored[attr]);
+                stored[attr] = localizeValue(stored[attr], el.getAttribute(attr), isEnglish);
+                if (el.getAttribute(attr) !== stored[attr].last) el.setAttribute(attr, stored[attr].last);
             });
         });
     }
 
     function updateDocumentTitle(isEnglish) {
-        document.title = isEnglish ? translateText(originalDocumentTitle).trim() : originalDocumentTitle;
+        titleMemory = localizeValue(titleMemory, document.title, isEnglish);
+        if (document.title !== titleMemory.last) document.title = titleMemory.last;
+    }
+
+    function localizeValue(record, current, isEnglish) {
+        if (!record || current !== record.last) record = { original: current };
+        record.last = isEnglish ? translateText(record.original) : record.original;
+        return record;
     }
 
     function updateLanguageButton(isEnglish, isLoading) {
@@ -428,8 +446,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!button) {
             return;
         }
-        const text = isLoading ? '...' : (isEnglish ? '\u4E2D\u6587' : 'EN');
-        const title = isEnglish ? '\u5207\u6362\u5230\u4E2D\u6587' : 'Switch to English';
+        const text = isLoading ? '...' : (isEnglish ? 'ZH' : 'EN');
+        const title = isLoading ? 'Loading English' : (isEnglish ? 'Switch to Chinese' : 'Switch to English');
+        button.setAttribute('aria-busy', String(isLoading));
         if (button.textContent !== text) {
             button.textContent = text;
         }
@@ -483,60 +502,18 @@ document.addEventListener('DOMContentLoaded', function() {
         return leading + translateByTerms(core) + trailing;
     }
 
-    function restoreChineseText(text) {
-        if (!text || /[\u3400-\u9fff]/.test(text)) {
-            return text;
-        }
-
-        const leading = text.match(/^\s*/)[0];
-        const trailing = text.match(/\s*$/)[0];
-        const core = text.trim().replace(/\s+/g, ' ');
-        const completeTranslations = window.siteEnglishTranslations || {};
-        const translationEntries = Object.keys(exactTranslations)
-            .concat(Object.keys(completeTranslations))
-            .map(function(chinese) {
-                return [exactTranslations[chinese] || completeTranslations[chinese], chinese];
-            })
-            .filter(function(entry) {
-                return entry[0];
-            })
-            .sort(function(a, b) {
-                return b[0].length - a[0].length;
-            });
-
-        const exactMatch = translationEntries.find(function(entry) {
-            return entry[0] === core;
-        });
-        if (exactMatch) {
-            return leading + exactMatch[1] + trailing;
-        }
-
-        let restored = core;
-        translationEntries
-            .concat(Object.keys(phraseTranslations).map(function(chinese) {
-                return [phraseTranslations[chinese], chinese];
-            }))
-            .sort(function(a, b) {
-                return b[0].length - a[0].length;
-            })
-            .forEach(function(entry) {
-                restored = restored.split(entry[0]).join(entry[1]);
-            });
-
-        return leading + restored + trailing;
-    }
-
     function translateByTerms(text) {
         let output = text;
-        Object.keys(exactTranslations)
-            .concat(Object.keys(phraseTranslations))
-            .sort(function(a, b) {
-                return b.length - a.length;
-            })
-            .forEach(function(term) {
-                const translated = exactTranslations[term] || phraseTranslations[term];
-                output = output.split(term).join(translated);
-            });
+        if (!translationTerms) {
+            const translations = Object.assign({}, phraseTranslations, window.siteEnglishTranslations, exactTranslations);
+            translationTerms = Object.keys(translations)
+                .filter(function(term) { return /[\u3400-\u9fff]/.test(term); })
+                .sort(function(a, b) { return b.length - a.length; })
+                .map(function(term) { return [term, translations[term]]; });
+        }
+        translationTerms.forEach(function(entry) {
+            output = output.split(entry[0]).join(' ' + entry[1] + ' ');
+        });
 
         return output
             .replace(/，/g, ', ')
@@ -553,26 +530,31 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function observeDynamicText() {
-        let timer = null;
         const observer = new MutationObserver(function(mutations) {
-            const hasAddedText = mutations.some(function(mutation) {
-                return Array.from(mutation.addedNodes).some(function(node) {
-                    return node.nodeType === Node.TEXT_NODE || (node.nodeType === Node.ELEMENT_NODE && node.textContent.trim());
-                });
+            if (document.body.dataset.siteLanguage !== 'en') return;
+            const roots = new Set();
+            mutations.forEach(function(mutation) {
+                const target = mutation.target;
+                if (mutation.type === 'characterData' && textMemory.get(target)?.last === target.nodeValue) return;
+                if (mutation.type === 'attributes' && attrMemory.get(target)?.[mutation.attributeName]?.last === target.getAttribute(mutation.attributeName)) return;
+                const root = target.nodeType === Node.TEXT_NODE ? target.parentElement : target;
+                if (root && !root.closest('head, script, style, .language-switcher, .multiple-text, .typed-cursor')) roots.add(root);
             });
-            if (!hasAddedText || document.body.dataset.siteLanguage !== 'en') {
-                return;
-            }
-            clearTimeout(timer);
-            timer = setTimeout(function() {
-                translateTextNodes(true);
-                translateAttributes(true);
-            }, 40);
+            observer.disconnect();
+            roots.forEach(function(root) {
+                translateTextNodes(true, root);
+                translateAttributes(true, root);
+            });
+            updateDocumentTitle(true);
+            watch();
         });
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true
-        });
+        function watch() {
+            observer.observe(document.documentElement, {
+                childList: true, characterData: true, attributes: true, subtree: true,
+                attributeFilter: ['placeholder', 'title', 'alt', 'aria-label', 'aria-valuetext', 'data-tooltip', 'value']
+            });
+        }
+        watch();
     }
 });
 
@@ -1005,7 +987,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 (function($) {
-  if (!$) {
+  // The legacy homepage already binds its own navigation handlers.
+  if (!$ || /\/homepage\.html$/.test(window.location.pathname)) {
     return;
   }
   function init() {

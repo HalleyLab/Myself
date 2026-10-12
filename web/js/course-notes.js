@@ -322,6 +322,7 @@
     renderCourseList();
     renderNote(notes.find((item) => item.id === activeNoteId) || notes[0], false);
     bindNavigation();
+    document.addEventListener('site-language-change', renderCourseList);
 
     function renderCategories() {
         categoryFilters.innerHTML = '';
@@ -358,7 +359,9 @@
                 ...note.concepts,
                 ...note.pitfalls,
                 ...note.checklist
-            ].join(' ').toLocaleLowerCase('zh-CN');
+            ].map(function(text) {
+                return document.body.dataset.siteLanguage === 'en' && window.translateSiteText ? window.translateSiteText(text) : text;
+            }).join(' ').toLocaleLowerCase();
             return searchable.includes(term);
         });
     }
