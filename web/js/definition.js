@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const attrMemory = new WeakMap();
     const languageKey = 'siteLanguage';
     let titleMemory;
-    const translationScriptUrl = new URL('translations-en.js?v=20261012', document.querySelector('script[src*="/definition.js"]').src).href;
+    const translationScriptUrl = new URL('translations-en.js?v=20261012-final', document.querySelector('script[src*="/definition.js"]').src).href;
     let translationLoadPromise = null;
     let languageChangeId = 0;
     let translationTerms;
