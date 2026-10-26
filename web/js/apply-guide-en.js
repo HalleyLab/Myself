@@ -577,5 +577,9 @@ window.siteEnglishTranslations = Object.freeze(Object.assign({}, window.siteEngl
   "结果怎么走？": "What happens next?",
   "录取与资助可接受 → 签证、入学": "Acceptable offer and funding → visa and arrival",
   "没有合适结果 ↶ 调整选校或申请轮次": "No suitable result ↶ revise programs or application round",
-  "适用范围与使用说明": "Scope and reading notes"
+  "适用范围与使用说明": "Scope and reading notes",
+  "留学申请，沿着路线走": "Your study-abroad journey",
+  "向下滚动，逐步走完整个申请流程。点击手写标题查看详细方法。": "Scroll through the application journey. Select a handwritten heading for the detailed guide.",
+  "查看逐月时间线 →": "See the monthly timeline →",
+  "按项目要求安排；材料可并行准备。": "Follow each program’s requirements; prepare materials in parallel."
 }));
