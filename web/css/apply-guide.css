@@ -1,0 +1,214 @@
+/* Long-form application guidance; keep the shared notebook and toolbar. */
+.abroad-guide .subnav-bar {
+    top: 110px;
+    width: 240px;
+    max-height: calc(100dvh - 136px);
+    overflow-y: auto;
+    z-index: 5;
+}
+
+.abroad-guide .subnav-bar ul {
+    margin: 0;
+    padding: 8px 12px;
+}
+
+.abroad-guide .subnav-bar ul::before { display: none; }
+.abroad-guide .subnav-bar li { margin: 3px 0; }
+
+.abroad-guide .subnav-bar .menu-btn {
+    display: block;
+    width: 100%;
+    padding: 12px 16px;
+    border: 0;
+    border-left: 3px solid transparent;
+    border-radius: 0;
+    background: transparent;
+    color: var(--text-color);
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: left;
+    cursor: pointer;
+}
+
+.abroad-guide .subnav-bar .menu-btn.active,
+.abroad-guide .subnav-bar .menu-btn:hover {
+    border-left-color: currentColor;
+    background: rgba(127, 127, 127, .10);
+}
+
+.abroad-guide .menu-btn:focus-visible,
+.abroad-guide .expand-menu-header:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+}
+
+.abroad-guide .general-content {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    width: calc(100% - 520px) !important;
+    max-width: 1100px !important;
+    min-height: 620px !important;
+    margin: 110px 0 50px 250px !important;
+    padding: 34px !important;
+}
+
+.abroad-guide .general-content .expand-menu {
+    position: static !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+}
+
+.abroad-guide .general-content .expand-menu-header {
+    position: absolute !important;
+    right: -220px !important;
+    width: 220px !important;
+    min-width: 220px !important;
+    max-width: 220px !important;
+    min-height: 56px;
+    padding: 12px 16px;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: left;
+    cursor: pointer;
+}
+
+.abroad-guide .general-content .expand-menu-body {
+    position: relative !important;
+    display: none !important;
+    width: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    color: var(--text-color);
+    font-size: 15px;
+    line-height: 1.85;
+    letter-spacing: 0;
+}
+
+.abroad-guide .general-content .open > .expand-menu-body {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+}
+
+.abroad-guide .expand-menu-body p {
+    margin: 0 0 18px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.abroad-guide .expand-menu-body h2 {
+    font-size: clamp(24px, 2.5vw, 34px) !important;
+    line-height: 1.35 !important;
+    overflow-wrap: anywhere;
+}
+
+.abroad-guide .expand-menu-body h3 {
+    margin: 26px 0 12px;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.abroad-guide .guide-list {
+    margin: 0 0 20px;
+    padding-left: 24px;
+    list-style: disc;
+}
+
+.abroad-guide ol.guide-list { list-style: decimal; }
+.abroad-guide .guide-list li { margin: 0 0 14px; padding-left: 5px; }
+
+.abroad-guide .expand-menu-body .guide-callout {
+    padding: 16px 18px !important;
+    border-left: 3px solid currentColor !important;
+    background: rgba(127, 127, 127, .08) !important;
+}
+
+.abroad-guide .guide-table-wrap {
+    max-width: 100%;
+    margin: 0 0 22px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+}
+
+.abroad-guide .guide-table {
+    width: 100%;
+    min-width: 600px;
+    border-collapse: collapse;
+    color: inherit;
+    font-size: 14px;
+    line-height: 1.75;
+}
+
+.abroad-guide .guide-table th,
+.abroad-guide .guide-table td {
+    padding: 14px 12px;
+    border-bottom: 1px solid rgba(127, 127, 127, .26);
+    text-align: left;
+    vertical-align: top;
+    white-space: normal;
+}
+
+.abroad-guide .guide-table th { background: rgba(127, 127, 127, .10); }
+.abroad-guide .guide-table td:first-child { min-width: 130px; font-weight: 600; }
+
+.abroad-guide .guide-template {
+    max-width: 100%;
+    margin: 0 0 22px;
+    padding: 20px;
+    border: 1px solid rgba(127, 127, 127, .26);
+    background: rgba(127, 127, 127, .07);
+    color: inherit;
+    font: 13px/1.8 Consolas, monospace;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.abroad-guide .guide-source { font-size: 13px !important; }
+.abroad-guide .guide-source a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+
+@media (max-width: 980px) {
+    .abroad-guide .subnav-bar {
+        position: static;
+        display: block;
+        width: auto;
+        max-height: none;
+        margin: 140px 16px 16px;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+    .abroad-guide .subnav-bar ul {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        width: max-content;
+        padding: 0;
+    }
+    .abroad-guide .subnav-bar li { margin: 0 8px 0 0; }
+    .abroad-guide .subnav-bar .menu-btn { width: auto; padding: 10px 14px; white-space: nowrap; }
+    .abroad-guide .general-content {
+        width: calc(100% - 32px) !important;
+        min-height: 0 !important;
+        margin: 16px !important;
+        padding: 24px !important;
+    }
+    .abroad-guide .general-content .expand-menu-header {
+        position: static !important;
+        right: auto !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: none !important;
+        margin: 10px 0 !important;
+    }
+    .abroad-guide .general-content .open > .expand-menu-body { padding: 18px 0 24px !important; }
+}

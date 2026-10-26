@@ -58,6 +58,7 @@ const source = fs.readFileSync('js/definition.js', 'utf8');
 const context = {window: {}, document: {getElementById() {return null;}}};
 vm.createContext(context);
 vm.runInContext(fs.readFileSync('js/translations-en.js', 'utf8'), context);
+vm.runInContext(fs.readFileSync('js/apply-guide-en.js', 'utf8'), context);
 vm.runInContext(fs.readFileSync('js/course-notes.js', 'utf8'), context);
 const maps = source.match(/const exactTranslations = (\{[\s\S]*?\n    \});/)[0] + '\n' +
     source.match(/const phraseTranslations = (\{[\s\S]*?\n    \});/)[0];
