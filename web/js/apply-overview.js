@@ -40,13 +40,14 @@ document.addEventListener('click', function(event) {
             observer.unobserve(entry.target);
         });
         queueParallax();
-    }, {threshold: .12, rootMargin: '0px 0px -5% 0px'});
+    }, {threshold: 0, rootMargin: '0px 0px -5% 0px'});
 
-    overview.querySelectorAll('.flow-step, .flow-parallel, .flow-decisions').forEach(function(step) {
+    // Tall lists and timeline tables should reveal as soon as their first line enters view.
+    document.querySelectorAll('.flow-step, .flow-parallel, .flow-decisions, .general-content:not(#tab0) .expand-menu-body > :not(.bookmark-page-title)').forEach(function(step) {
         step.classList.add('flow-reveal');
         observer.observe(step);
     });
-    overview.classList.add('flow-motion');
+    document.body.classList.add('flow-motion');
     window.addEventListener('scroll', queueParallax, {passive: true});
     window.addEventListener('resize', queueParallax, {passive: true});
     queueParallax();

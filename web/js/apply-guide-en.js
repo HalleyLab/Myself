@@ -581,5 +581,6 @@ window.siteEnglishTranslations = Object.freeze(Object.assign({}, window.siteEngl
   "留学申请，沿着路线走": "Your study-abroad journey",
   "向下滚动，逐步走完整个申请流程。点击手写标题查看详细方法。": "Scroll through the application journey. Select a handwritten heading for the detailed guide.",
   "查看逐月时间线 →": "See the monthly timeline →",
-  "按项目要求安排；材料可并行准备。": "Follow each program’s requirements; prepare materials in parallel."
+  "按项目要求安排；材料可并行准备。": "Follow each program’s requirements; prepare materials in parallel.",
+  "先选左侧分类，再打开章节标题。可使用搜索定位详细内容，中英切换覆盖全部指南文字。": "Choose a category on the left, then open a chapter heading. Use search to find details; language switching covers the entire guide."
 }));

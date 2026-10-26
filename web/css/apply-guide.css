@@ -1,4 +1,4 @@
-/* Page content uses the same general_course.css and notebook.css as ZJU. */
+/* Handwritten paper treatment scoped to the study-abroad guide. */
 .abroad-guide .subnav-bar {
     max-height: calc(90vh - 16px);
     overflow-y: auto;
@@ -40,18 +40,77 @@
     content: none;
 }
 
-@font-face { font-family: "Application Hand"; src: url("../fonts/application-hand.woff2") format("woff2"); font-weight: 400; font-display: swap; }
-/* One inked route with three small drawings and selectable bilingual text. */
-.abroad-guide .general-content { scroll-margin-top: 88px; }
-.flow-overview#tab0 {
+@font-face { font-family: "Application Hand"; src: url("../fonts/application-hand.woff2?v=20261026-unified") format("woff2"); font-weight: 400; font-display: swap; }
+/* The same paper, ink and handwriting continue through all ten chapters. */
+body.abroad-guide {
+ --guide-paper: #f9f5eb; --guide-rule: #c6ccc0;
  --flow-ink: #254d50; --flow-muted: #776b52;
+ --background-color: #f9f5eb; --text-color: #304344;
+ background: var(--guide-paper) !important; background-size: auto !important; background-attachment: scroll !important;
+ color: var(--text-color); font-family: "Application Hand", "Kaiti", "KaiTi", cursive;
+}
+body.abroad-guide.dark-theme, .dark-theme body.abroad-guide {
+ --guide-paper: #232a2a; --guide-rule: #516260;
+ --flow-ink: #a8d0c7; --flow-muted: #c3b69a;
+ --background-color: #232a2a; --text-color: #e1e6de;
+}
+.abroad-guide .general-content {
  width: calc(80% - 48px) !important; max-width: 1450px !important; min-height: 0 !important;
  margin: 88px 28px 40px calc(20% + 20px) !important; padding: 40px clamp(22px, 5vw, 100px) !important;
- background: #f9f5eb !important; border: 0; border-radius: 0; box-shadow: none;
- font-family: "Application Hand", "Kaiti", "KaiTi", cursive;
+ background: var(--guide-paper) !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important;
+ backdrop-filter: none; font-family: inherit; font-size: 18px; line-height: 1.9; scroll-margin-top: 88px;
 }
-.dark-theme .flow-overview#tab0 { --flow-ink: #a8d0c7; --flow-muted: #c3b69a; background: #232a2a !important; }
-.flow-overview#tab0::before, .flow-overview#tab0::after { display: none; }
+.abroad-guide .general-content::before, .abroad-guide .general-content::after { display: none !important; }
+.abroad-guide .general-content.active.page-turning, .abroad-guide .general-content .expand-menu.open.page-opening .expand-menu-body { animation: none; }
+.abroad-guide .subnav-bar { top: 100px; width: 20%; max-height: calc(100vh - 124px); }
+.abroad-guide .subnav-bar ul { box-sizing: border-box; width: 100%; margin: 0; padding: 8px 18px; }
+.abroad-guide .subnav-bar ul::before { left: 25px; background: var(--guide-rule); }
+.abroad-guide .subnav-bar li { margin: 0 12px 5px; }
+.abroad-guide .subnav-bar button.menu-btn { padding: 10px 12px 10px 20px; font-size: 19px; line-height: 1.6; font-weight: 400; color: var(--flow-muted); }
+.abroad-guide .subnav-bar button.menu-btn::before { content: none; }
+.abroad-guide .subnav-bar button.menu-btn.active { color: var(--flow-ink); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 7px; }
+.abroad-guide .subnav-bar button.menu-btn:hover { color: var(--flow-ink); }
+.abroad-guide .general-content .expand-menu { margin: 8px 0; }
+.abroad-guide .general-content .expand-menu .expand-menu-header,
+.abroad-guide .general-content .expand-menu.open .expand-menu-header,
+.abroad-guide .general-content .expand-menu .expand-menu-header:hover {
+ position: relative !important; inset: auto !important; width: 100% !important; min-width: 0 !important; max-width: none !important; min-height: 0;
+ margin: 0 !important; padding: 20px 0 !important; border: 0 !important; border-radius: 0 !important;
+ background: transparent !important; box-shadow: none !important; color: var(--flow-ink) !important;
+ font-family: inherit; font-size: 25px !important; font-weight: 400 !important; line-height: 1.6 !important;
+}
+.abroad-guide .general-content .expand-menu .expand-menu-header::after { content: ""; position: absolute; left: 0; right: 0; bottom: 4px; border-bottom: 1px dashed var(--guide-rule); transform: rotate(-.15deg); }
+.abroad-guide .general-content .expand-menu.open .expand-menu-header::after { border-bottom-color: var(--flow-ink); }
+.abroad-guide .general-content .expand-arrow { margin-left: auto; padding-left: 16px; font-size: 11px; }
+.abroad-guide .general-content .expand-menu-body { padding: 0 !important; }
+.abroad-guide .general-content .expand-menu.open > .expand-menu-body { padding: 8px 0 28px !important; }
+.abroad-guide .general-content .bookmark-page-title { display: none; }
+.abroad-guide .general-content h2 { margin: 16px 0 22px !important; padding: 0 !important; border: 0 !important; font-size: clamp(28px, 3vw, 38px) !important; font-weight: 400 !important; line-height: 1.5 !important; }
+.abroad-guide .general-content h2::before { content: none !important; }
+.abroad-guide .general-content .grades-title { margin: 32px 0 14px; padding: 0; border: 0; color: var(--flow-ink); font-size: 24px; font-weight: 400; letter-spacing: 0; }
+.abroad-guide .general-content .expand-menu-body > p { margin: 18px 0 26px !important; padding: 0 !important; border: 0 !important; border-radius: 0 !important; background: transparent !important; box-shadow: none !important; font-size: 18px !important; line-height: 1.95 !important; }
+.abroad-guide .general-content .expand-menu-body > p.guide-callout { padding-left: 18px !important; border-left: 2px solid var(--guide-rule) !important; color: var(--flow-muted); font-size: 17px !important; }
+.abroad-guide .general-content .guide-list { margin: 14px 0 32px; padding-top: 0; padding-bottom: 0; border: 0; border-radius: 0; background: transparent !important; box-shadow: none !important; font-size: 18px; }
+.abroad-guide .general-content .guide-list li { margin: 0 0 15px; line-height: 1.95; }
+.abroad-guide .general-content ul.guide-list li::before { content: "–"; top: 0; left: 0; width: auto; height: auto; background: none; color: var(--flow-ink); }
+.abroad-guide .general-content ol.guide-list li { padding-left: 6px; }
+.abroad-guide .general-content ol.guide-list li::marker { color: var(--flow-ink); }
+.abroad-guide .general-content .guide-table { border: 0 !important; border-radius: 0 !important; border-collapse: collapse !important; background: transparent !important; box-shadow: none !important; font-family: inherit; font-size: 17px !important; }
+.abroad-guide .general-content .guide-table th, .abroad-guide .general-content .guide-table td { padding: 14px 14px 14px 0 !important; border: 0 !important; border-bottom: 1px solid var(--guide-rule) !important; background: transparent !important; font-weight: 400 !important; line-height: 1.9 !important; }
+.abroad-guide .general-content .guide-table th { border-bottom: 2px solid var(--flow-ink) !important; color: var(--flow-ink); font-size: 19px; }
+.abroad-guide .general-content .guide-template { margin: 24px 0; padding: 12px 0 12px 22px !important; border: 0 !important; border-left: 2px dashed var(--guide-rule) !important; border-radius: 0 !important; background: transparent !important; box-shadow: none !important; color: var(--text-color); font-family: inherit; font-size: 17px; line-height: 1.9; }
+.abroad-guide .general-content .expand-menu-body .download-link,
+.abroad-guide .general-content .expand-menu-body .download-link:hover { display: inline; margin: 4px 16px 4px 0; padding: 0 0 2px; border: 0; border-bottom: 1px dashed var(--flow-ink); border-radius: 0; background: none; box-shadow: none; color: var(--flow-ink); font-size: 16px; line-height: 2; }
+.abroad-guide nav { background: var(--guide-paper); backdrop-filter: none; }
+.abroad-guide nav ul li a, .abroad-guide nav ul li.nav-group .nav-submenu a { color: var(--text-color) !important; font-family: inherit; font-weight: 400; }
+.abroad-guide nav .nav-submenu { background: var(--guide-paper); }
+.abroad-guide header .btnMenu i { background: var(--flow-ink) !important; }
+.abroad-guide .language-switcher, .abroad-guide .theme-switcher { border: 0; border-bottom: 1px solid var(--guide-rule); border-radius: 0; background: var(--guide-paper) !important; color: var(--flow-ink) !important; box-shadow: none !important; font-family: inherit; font-size: 17px; font-weight: 400; }
+.abroad-guide .group.site-search .input { border: 0; border-bottom: 1px solid var(--guide-rule); border-radius: 0; background: var(--guide-paper) !important; color: var(--text-color); box-shadow: none !important; font-family: inherit; font-size: 17px; }
+.abroad-guide .site-search-results { border: 1px solid var(--guide-rule); border-radius: 0; background: var(--guide-paper) !important; color: var(--text-color) !important; box-shadow: none !important; }
+.abroad-guide .site-search-result, .abroad-guide .site-search-status, .abroad-guide .site-search-empty { font-family: inherit; }
+.abroad-guide .site-search-result-title { color: var(--flow-ink) !important; font-weight: 400; }
+.abroad-guide .site-search-result-snippet, .abroad-guide .site-search-status, .abroad-guide .site-search-empty { color: var(--flow-muted) !important; }
 .flow-overview .overview-menu > .expand-menu-header { display: none !important; }
 .flow-overview .overview-menu > .expand-menu-body { overflow: visible !important; }
 .flow-overview button { font-family: inherit; }
@@ -93,23 +152,23 @@
 .flow-lane span > span { font-size: 17px; line-height: 1.8; opacity: .8; }
 .flow-decisions > strong { display: block; margin-bottom: 12px; font-size: 24px; font-weight: 400; }
 .flow-decisions button { display: block; padding: 8px 0; border: 0; background: none; color: var(--flow-ink); text-align: left; font-size: 18px; line-height: 1.8; cursor: pointer; }
-.flow-reading-notes { margin-top: 40px; font-family: sans-serif; font-size: 12px; }
+.flow-reading-notes { margin-top: 40px; font-family: inherit; font-size: 12px; }
 .flow-reading-notes > summary { width: fit-content; cursor: pointer; opacity: .75; }
 .flow-reading-notes > div { padding-top: 10px; }
 .flow-motion .flow-reveal { transition: opacity .75s ease, transform .75s cubic-bezier(.2,.65,.3,1); }
 .flow-motion .flow-reveal:not(.is-visible):not(:focus-within) { opacity: 0; transform: translateY(30px); }
 @media (max-width: 980px) {
     .abroad-guide .subnav-bar { position: static; display: block; width: auto; max-height: none; margin: 132px 16px 16px; overflow-x: auto; overflow-y: hidden; }
-    .abroad-guide .subnav-bar ul { flex-direction: row; flex-wrap: nowrap; width: max-content; padding: 0; }
+    .abroad-guide .subnav-bar ul { width: max-content; flex-direction: row; flex-wrap: nowrap; width: max-content; padding: 0; }
     .abroad-guide .subnav-bar ul::before { display: none; }
     .abroad-guide .subnav-bar li { margin: 0 8px 0 0; }
     .abroad-guide .subnav-bar button.menu-btn { width: auto; padding: 10px 14px; white-space: nowrap; font-size: 14px; }
     .abroad-guide .subnav-bar button.menu-btn::before { display: none; }
     .abroad-guide .subnav-bar button.menu-btn.active { box-shadow: inset 0 -2px currentColor !important; }
-    .abroad-guide .general-content, .flow-overview#tab0 { width: calc(100% - 32px) !important; min-height: 0 !important; margin: 16px !important; padding: 20px !important; }
+    .abroad-guide .general-content { width: calc(100% - 32px) !important; min-height: 0 !important; margin: 16px !important; padding: 20px !important; }
     .abroad-guide .general-content { scroll-margin-top: 132px; }
     .abroad-guide .general-content .expand-menu-header { position: static !important; right: auto !important; width: 100% !important; min-width: 0 !important; max-width: none !important; margin: 10px 0 !important; }
-    .flow-overview#tab0 { padding: 28px 20px !important; }
+    .abroad-guide .general-content { padding: 28px 20px !important; }
 }
 
 
