@@ -1,6 +1,5 @@
 window.siteEnglishTranslations = Object.freeze(Object.assign({}, window.siteEnglishTranslations, {
   "从选校、套磁、教授会议，到文书、考试、网申和入学，把申请拆成可执行、可记录的任务。以硕士与博士为主，使用药学、生命科学的例子，也可迁移到其他学科。": "Turn applications into trackable tasks: program selection, faculty outreach, meetings, writing, tests, submission and arrival. This guide focuses on master’s and doctoral study, with pharmacy and life-science examples adaptable to other disciplines.",
-  "先选左侧分类，再打开右侧书签；小屏幕上分类横向排列。搜索可以定位关闭书签内的内容，中英切换覆盖全部指南文字。": "Choose a category, then a bookmark. Categories scroll horizontally on smaller screens. Search can find content inside closed bookmarks, and the language switch covers the entire guide.",
   "规则核对：2026-10-26。以 2027 年秋季入学示范排期；月份、邮件长度和复习周数是规划建议，实际截止、材料、语言与资助要求须逐项核对项目官网。": "Rules checked: 26 October 2026. The example targets autumn 2027 entry. Months, email lengths and preparation periods are planning suggestions; verify actual deadlines, documents, language and funding requirements on each program’s website.",
   "留学申请全流程": "Graduate Study Abroad: A Complete Guide",
   "申请导航总览": "Start here overview",
@@ -536,5 +535,6 @@ window.siteEnglishTranslations = Object.freeze(Object.assign({}, window.siteEngl
   "文书与推荐": "Essays and references",
   "语言考试": "Language tests",
   "网申与面试": "Submission and interviews",
-  "录取与行前": "Offers and arrival"
+  "录取与行前": "Offers and arrival",
+  "先选左侧分类，再打开右侧书签。可使用搜索定位书签中的内容，中英切换覆盖全部指南文字。": "Choose a category from the left and open its bookmarks. Search can find text within bookmarks, and the language switch covers the entire guide."
 }));

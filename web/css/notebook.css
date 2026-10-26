@@ -52,7 +52,8 @@ body.dark-theme {
     margin: 8px 30px;
 }
 
-.subnav-bar a {
+.subnav-bar a,
+.subnav-bar button.menu-btn {
     position: relative;
     display: block;
     padding: 11px 18px 11px 30px;
@@ -67,7 +68,8 @@ body.dark-theme {
     transition: color .22s ease, opacity .22s ease;
 }
 
-.subnav-bar a::before {
+.subnav-bar a::before,
+.subnav-bar button.menu-btn::before {
     content: "";
     position: absolute;
     left: 0;
@@ -81,27 +83,36 @@ body.dark-theme {
 }
 
 .subnav-bar a:hover,
-.subnav-bar a.active {
+.subnav-bar button.menu-btn:hover,
+.subnav-bar a.active,
+.subnav-bar button.menu-btn.active {
     color: var(--text-color);
 }
 
 .subnav-bar a:hover::before,
-.subnav-bar a.active::before {
+.subnav-bar button.menu-btn:hover::before,
+.subnav-bar a.active::before,
+.subnav-bar button.menu-btn.active::before {
     border-color: var(--text-color);
     background: var(--text-color);
 }
 
-.dark-theme .subnav-bar a::before {
+.dark-theme .subnav-bar a::before,
+.dark-theme .subnav-bar button.menu-btn::before {
     border-color: rgba(255, 255, 255, 0.30);
 }
 
 .dark-theme .subnav-bar a:hover,
-.dark-theme .subnav-bar a.active {
+.dark-theme .subnav-bar button.menu-btn:hover,
+.dark-theme .subnav-bar a.active,
+.dark-theme .subnav-bar button.menu-btn.active {
     color: #ffffff !important;
 }
 
 .dark-theme .subnav-bar a:hover::before,
-.dark-theme .subnav-bar a.active::before {
+.dark-theme .subnav-bar button.menu-btn:hover::before,
+.dark-theme .subnav-bar a.active::before,
+.dark-theme .subnav-bar button.menu-btn.active::before {
     border-color: #ffffff !important;
     background: #ffffff !important;
     box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.08) !important;
@@ -822,4 +833,12 @@ body.dark-theme,
 .dark-theme .course-note-toggle:hover,
 .dark-theme .course-note-toggle:focus-visible {
     background: rgba(255, 255, 255, 0.075);
+}
+
+/* Native category buttons share the existing notebook link treatment. */
+.subnav-bar button.menu-btn {
+    width: 100%;
+    border: 0;
+    font-family: inherit;
+    text-align: left;
 }
