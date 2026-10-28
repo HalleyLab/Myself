@@ -71,7 +71,7 @@ body.handwritten-page.dark-theme, .dark-theme body.handwritten-page {
 .handwritten-page .site-search-result-snippet, .handwritten-page .site-search-status, .handwritten-page .site-search-empty { color: var(--flow-muted) !important; }
 
 /* The laboratory notebook uses warmer parchment and brown pen ink. */
-body.lab-notebook { --paper-wash: rgba(243, 227, 199, .16); --guide-paper: #eee0c4; --guide-rule: #c4ad88; --flow-ink: #684b30; --flow-muted: #806b50; --text-color: #493b2c; --background-color: #eee0c4; }
+body.lab-notebook { --paper-wash: rgba(243, 227, 199, .16); --guide-paper: #eee0c4; --guide-rule: #c4ad88; --flow-ink: #684b30; --flow-muted: #6f5840; --text-color: #493b2c; --background-color: #eee0c4; }
 body.lab-notebook.dark-theme, .dark-theme body.lab-notebook { --paper-wash: rgba(42, 35, 29, .94); --guide-paper: #2a231d; --guide-rule: #77624a; --flow-ink: #d5b885; --flow-muted: #c1ad90; --text-color: #eee2cc; --background-color: #2a231d; }
 .handwritten-page .menu-btn:focus-visible, .handwritten-page .expand-menu-header:focus-visible { outline: 2px dashed var(--flow-ink); outline-offset: 5px; }
 .lab-notebook #tab0 .overview-menu > .expand-menu-header { display: none !important; }
