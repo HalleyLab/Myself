@@ -88,9 +88,16 @@ body.handwritten-page.dark-theme, .dark-theme body.handwritten-page {
 .handwritten-page .site-search-result:hover, .handwritten-page .site-search-result.is-active { background: var(--control-hover) !important; border-left-color: var(--control-focus) !important; }
 .handwritten-page .site-search-status kbd { border-color: var(--control-border); background: var(--control-hover); color: var(--text-color); }
 
+/* Text added by shared navigation, search and player code must keep the notebook handwriting. */
+body.lab-notebook, body.lab-notebook * {
+ font-family: "Application Hand", "Kaiti", "KaiTi", cursive !important;
+}
+body.lab-notebook :is(.fa, .fas, .far, .fa-solid, .fa-regular) { font-family: "Font Awesome 6 Free" !important; }
+body.lab-notebook :is(.fab, .fa-brands) { font-family: "Font Awesome 6 Brands" !important; }
+
 /* The laboratory notebook uses warmer parchment and brown pen ink. */
 body.lab-notebook { background: linear-gradient(var(--paper-wash), var(--paper-wash)), url("../images/paper/parchment.webp"), var(--guide-paper) !important; background-size: auto, 768px 768px, auto !important; --control-surface: #fff6e4; --control-border: #977c56; --control-hover: #ecddbd; --control-focus: #795a36; --control-shadow: 0 3px 12px rgba(89, 62, 26, .09); --paper-wash: rgba(243, 227, 199, .16); --guide-paper: #eee0c4; --guide-rule: #c4ad88; --flow-ink: #684b30; --flow-muted: #6f5840; --text-color: #493b2c; --background-color: #eee0c4; }
-body.lab-notebook.dark-theme, .dark-theme body.lab-notebook { background: linear-gradient(var(--paper-wash), var(--paper-wash)), url("../images/paper/parchment.webp"), var(--guide-paper) !important; background-size: auto, 768px 768px, auto !important; --control-surface: #fff6e4; --control-border: #977c56; --control-hover: #ecddbd; --control-focus: #795a36; --control-shadow: 0 3px 12px rgba(89, 62, 26, .09); --paper-wash: rgba(42, 35, 29, .94); --guide-paper: #2a231d; --guide-rule: #77624a; --flow-ink: #d5b885; --flow-muted: #c1ad90; --text-color: #eee2cc; --background-color: #2a231d; }
+body.lab-notebook.dark-theme, .dark-theme body.lab-notebook { background: linear-gradient(var(--paper-wash), var(--paper-wash)), url("../images/paper/parchment.webp"), var(--guide-paper) !important; background-size: auto, 768px 768px, auto !important; --control-surface: #382f25; --control-border: #ae9067; --control-hover: #493c2d; --control-focus: #e5c28a; --control-shadow: 0 3px 12px rgba(0, 0, 0, .18); --paper-wash: rgba(42, 35, 29, .94); --guide-paper: #2a231d; --guide-rule: #77624a; --flow-ink: #d5b885; --flow-muted: #c1ad90; --text-color: #eee2cc; --background-color: #2a231d; }
 .handwritten-page .menu-btn:focus-visible, .handwritten-page .expand-menu-header:focus-visible { outline: 2px dashed var(--flow-ink); outline-offset: 5px; }
 .lab-notebook #tab0 .overview-menu > .expand-menu-header { display: none !important; }
 .lab-notebook .notebook-heading { display: flex; justify-content: space-between; align-items: center; gap: 25px; margin-bottom: 25px; }
