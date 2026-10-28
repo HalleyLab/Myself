@@ -1,0 +1,118 @@
+@font-face { font-family: "Application Hand"; src: url("../fonts/application-hand.woff2?v=20261028-paper") format("woff2"); font-weight: 400; font-display: swap; }
+/* The same paper, ink and handwriting continue through all ten chapters. */
+body.handwritten-page {
+ --paper-wash: rgba(249, 245, 235, .56); --guide-paper: #f9f5eb; --guide-rule: #c6ccc0;
+ --flow-ink: #254d50; --flow-muted: #776b52;
+ --background-color: #f9f5eb; --text-color: #304344;
+ background: linear-gradient(var(--paper-wash), var(--paper-wash)), url("../images/paper/parchment.webp"), var(--guide-paper) !important; background-size: auto, 768px 768px, auto !important; background-attachment: scroll !important;
+ color: var(--text-color); font-family: "Application Hand", "Kaiti", "KaiTi", cursive;
+}
+body.handwritten-page.dark-theme, .dark-theme body.handwritten-page {
+ --paper-wash: rgba(35, 42, 42, .94); --guide-paper: #232a2a; --guide-rule: #516260;
+ --flow-ink: #a8d0c7; --flow-muted: #c3b69a;
+ --background-color: #232a2a; --text-color: #e1e6de;
+}
+.handwritten-page .general-content {
+ width: calc(80% - 48px) !important; max-width: 1450px !important; min-height: 0 !important;
+ margin: 88px 28px 40px calc(20% + 20px) !important; padding: 40px clamp(22px, 5vw, 100px) !important;
+ background: transparent !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important;
+ backdrop-filter: none; font-family: inherit; font-size: 18px; line-height: 1.9; scroll-margin-top: 88px;
+}
+.handwritten-page .general-content::before, .handwritten-page .general-content::after { display: none !important; }
+.handwritten-page .general-content.active.page-turning, .handwritten-page .general-content .expand-menu.open.page-opening .expand-menu-body { animation: none; }
+.handwritten-page .subnav-bar { top: 100px; width: 20%; max-height: calc(100vh - 124px); }
+.handwritten-page .subnav-bar ul { box-sizing: border-box; width: 100%; margin: 0; padding: 8px 18px; }
+.handwritten-page .subnav-bar ul::before { left: 25px; background: var(--guide-rule); }
+.handwritten-page .subnav-bar li { margin: 0 12px 5px; }
+.handwritten-page .subnav-bar button.menu-btn { padding: 10px 12px 10px 20px; font-size: 19px; line-height: 1.6; font-weight: 400; color: var(--flow-muted); }
+.handwritten-page .subnav-bar button.menu-btn::before { content: none; }
+.handwritten-page .subnav-bar button.menu-btn.active { color: var(--flow-ink); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 7px; }
+.handwritten-page .subnav-bar button.menu-btn:hover { color: var(--flow-ink); }
+.handwritten-page .general-content .expand-menu { margin: 8px 0; }
+.handwritten-page .general-content .expand-menu .expand-menu-header,
+.handwritten-page .general-content .expand-menu.open .expand-menu-header,
+.handwritten-page .general-content .expand-menu .expand-menu-header:hover {
+ position: relative !important; inset: auto !important; width: 100% !important; min-width: 0 !important; max-width: none !important; min-height: 0;
+ margin: 0 !important; padding: 20px 0 !important; border: 0 !important; border-radius: 0 !important;
+ background: transparent !important; box-shadow: none !important; color: var(--flow-ink) !important;
+ font-family: inherit; font-size: 25px !important; font-weight: 400 !important; line-height: 1.6 !important;
+}
+.handwritten-page .general-content .expand-menu .expand-menu-header::after { content: ""; position: absolute; left: 0; right: 0; bottom: 4px; border-bottom: 1px dashed var(--guide-rule); transform: rotate(-.15deg); }
+.handwritten-page .general-content .expand-menu.open .expand-menu-header::after { border-bottom-color: var(--flow-ink); }
+.handwritten-page .general-content .expand-arrow { margin-left: auto; padding-left: 16px; font-size: 11px; }
+.handwritten-page .general-content .expand-menu-body { padding: 0 !important; }
+.handwritten-page .general-content .expand-menu.open > .expand-menu-body { padding: 8px 0 28px !important; }
+.handwritten-page .general-content .bookmark-page-title { display: none; }
+.handwritten-page .general-content h2 { margin: 16px 0 22px !important; padding: 0 !important; border: 0 !important; font-size: clamp(28px, 3vw, 38px) !important; font-weight: 400 !important; line-height: 1.5 !important; }
+.handwritten-page .general-content h2::before { content: none !important; }
+.handwritten-page .general-content .grades-title { margin: 32px 0 14px; padding: 0; border: 0; color: var(--flow-ink); font-size: 24px; font-weight: 400; letter-spacing: 0; }
+.handwritten-page .general-content .expand-menu-body > p { margin: 18px 0 26px !important; padding: 0 !important; border: 0 !important; border-radius: 0 !important; background: transparent !important; box-shadow: none !important; font-size: 18px !important; line-height: 1.95 !important; }
+.handwritten-page .general-content .expand-menu-body > p.guide-callout { padding-left: 18px !important; border-left: 2px solid var(--guide-rule) !important; color: var(--flow-muted); font-size: 17px !important; }
+.handwritten-page .general-content .guide-list { margin: 14px 0 32px; padding-top: 0; padding-bottom: 0; border: 0; border-radius: 0; background: transparent !important; box-shadow: none !important; font-size: 18px; }
+.handwritten-page .general-content .guide-list li { margin: 0 0 15px; line-height: 1.95; }
+.handwritten-page .general-content ul.guide-list li::before { content: "–"; top: 0; left: 0; width: auto; height: auto; background: none; color: var(--flow-ink); }
+.handwritten-page .general-content ol.guide-list li { padding-left: 6px; }
+.handwritten-page .general-content ol.guide-list li::marker { color: var(--flow-ink); }
+.handwritten-page .general-content .guide-table { border: 0 !important; border-radius: 0 !important; border-collapse: collapse !important; background: transparent !important; box-shadow: none !important; font-family: inherit; font-size: 17px !important; }
+.handwritten-page .general-content .guide-table th, .handwritten-page .general-content .guide-table td { padding: 14px 14px 14px 0 !important; border: 0 !important; border-bottom: 1px solid var(--guide-rule) !important; background: transparent !important; font-weight: 400 !important; line-height: 1.9 !important; }
+.handwritten-page .general-content .guide-table th { border-bottom: 2px solid var(--flow-ink) !important; color: var(--flow-ink); font-size: 19px; }
+.handwritten-page .general-content .guide-template { margin: 24px 0; padding: 12px 0 12px 22px !important; border: 0 !important; border-left: 2px dashed var(--guide-rule) !important; border-radius: 0 !important; background: transparent !important; box-shadow: none !important; color: var(--text-color); font-family: inherit; font-size: 17px; line-height: 1.9; }
+.handwritten-page .general-content .expand-menu-body .download-link,
+.handwritten-page .general-content .expand-menu-body .download-link:hover { display: inline; margin: 4px 16px 4px 0; padding: 0 0 2px; border: 0; border-bottom: 1px dashed var(--flow-ink); border-radius: 0; background: none; box-shadow: none; color: var(--flow-ink); font-size: 16px; line-height: 2; }
+.handwritten-page nav { background: var(--guide-paper); backdrop-filter: none; }
+.handwritten-page nav ul li a, .handwritten-page nav ul li.nav-group .nav-submenu a { color: var(--text-color) !important; font-family: inherit; font-weight: 400; }
+.handwritten-page nav .nav-submenu { background: var(--guide-paper); }
+.handwritten-page header .btnMenu i { background: var(--flow-ink) !important; }
+.handwritten-page .language-switcher, .handwritten-page .theme-switcher { border: 0; border-bottom: 1px solid var(--guide-rule); border-radius: 0; background: var(--guide-paper) !important; color: var(--flow-ink) !important; box-shadow: none !important; font-family: inherit; font-size: 17px; font-weight: 400; }
+.handwritten-page .group.site-search .input { border: 0; border-bottom: 1px solid var(--guide-rule); border-radius: 0; background: var(--guide-paper) !important; color: var(--text-color); box-shadow: none !important; font-family: inherit; font-size: 17px; }
+.handwritten-page .site-search-results { border: 1px solid var(--guide-rule); border-radius: 0; background: var(--guide-paper) !important; color: var(--text-color) !important; box-shadow: none !important; }
+.handwritten-page .site-search-result, .handwritten-page .site-search-status, .handwritten-page .site-search-empty { font-family: inherit; }
+.handwritten-page .site-search-result-title { color: var(--flow-ink) !important; font-weight: 400; }
+.handwritten-page .site-search-result-snippet, .handwritten-page .site-search-status, .handwritten-page .site-search-empty { color: var(--flow-muted) !important; }
+
+/* The laboratory notebook uses warmer parchment and brown pen ink. */
+body.lab-notebook { --paper-wash: rgba(243, 227, 199, .16); --guide-paper: #eee0c4; --guide-rule: #c4ad88; --flow-ink: #684b30; --flow-muted: #806b50; --text-color: #493b2c; --background-color: #eee0c4; }
+body.lab-notebook.dark-theme, .dark-theme body.lab-notebook { --paper-wash: rgba(42, 35, 29, .94); --guide-paper: #2a231d; --guide-rule: #77624a; --flow-ink: #d5b885; --flow-muted: #c1ad90; --text-color: #eee2cc; --background-color: #2a231d; }
+.handwritten-page .menu-btn:focus-visible, .handwritten-page .expand-menu-header:focus-visible { outline: 2px dashed var(--flow-ink); outline-offset: 5px; }
+.lab-notebook #tab0 .overview-menu > .expand-menu-header { display: none !important; }
+.lab-notebook .notebook-heading { display: flex; justify-content: space-between; align-items: center; gap: 25px; margin-bottom: 25px; }
+.lab-notebook .paper-kicker { font-size: 13px; letter-spacing: .15em; color: var(--flow-muted); }
+.lab-notebook .notebook-doodle { flex-shrink: 0; width: 76px; height: 76px; fill: none; stroke: var(--flow-ink); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; opacity: .62; transform: rotate(7deg); }
+.lab-notebook .protocol-overview-grid { display: flex; flex-direction: column; gap: 25px; margin: 36px 0; }
+.lab-notebook .protocol-overview-grid section { margin: 0; padding: 0 0 22px !important; border: 0 !important; border-bottom: 1px dashed var(--guide-rule) !important; border-radius: 0 !important; background: transparent !important; box-shadow: none !important; }
+.lab-notebook .protocol-overview-grid h3, .lab-notebook .protocol-subtitle { padding: 0 !important; margin: 30px 0 15px; border: 0 !important; color: var(--flow-ink); font: 400 25px/1.65 "Application Hand", cursive; letter-spacing: 0; }
+.lab-notebook .protocol-minititle { margin: 24px 0 12px; padding: 0; border: 0; color: var(--flow-muted); font: 400 21px/1.7 "Application Hand", cursive; }
+.lab-notebook .protocol-subtitle::before { min-width: 32px; color: var(--flow-ink); font: 400 17px/1.7 "Application Hand", cursive; letter-spacing: 0; }
+.handwritten-page.lab-notebook .general-content .protocol-text, .handwritten-page.lab-notebook .general-content .protocol-note { margin: 14px 0 22px; padding: 0 !important; border: 0 !important; border-radius: 0 !important; background: transparent !important; box-shadow: none !important; color: var(--text-color); font-family: inherit; font-size: 18px; line-height: 1.95; overflow-wrap: anywhere; }
+.handwritten-page.lab-notebook .general-content .protocol-note { padding-left: 18px !important; border-left: 2px solid var(--guide-rule) !important; color: var(--flow-muted); }
+.lab-notebook .general-content .protocol-list { margin: 16px 0 26px; padding: 0 0 0 24px; border: 0 !important; border-radius: 0 !important; background: transparent !important; box-shadow: none !important; font-size: 18px; line-height: 1.95; }
+.lab-notebook .protocol-list li { margin-bottom: 12px; line-height: 1.95; }
+.lab-notebook .protocol-list li::marker { color: var(--flow-ink); }
+.lab-notebook .protocol-table-wrap { max-width: 100%; margin: 24px 0 32px; overflow-x: auto; overscroll-behavior-x: contain; border: 0 !important; border-radius: 0 !important; background: transparent !important; box-shadow: none !important; }
+.lab-notebook .protocol-table { min-width: 520px; width: 100%; border: 0 !important; border-collapse: collapse; background: transparent !important; color: var(--text-color); font: inherit; font-size: 17px; }
+.lab-notebook .protocol-table th, .lab-notebook .protocol-table td { padding: 12px 14px 12px 0; border: 0; border-bottom: 1px solid var(--guide-rule); background: transparent; font-weight: 400; line-height: 1.8; vertical-align: top; }
+.lab-notebook .protocol-table th { color: var(--flow-ink); border-bottom: 2px solid var(--flow-ink); font-size: 19px; }
+.flow-motion .flow-reveal { transition: opacity 1s ease, transform 1.15s cubic-bezier(.2,.65,.3,1); }
+.flow-motion .flow-reveal:not(.is-visible):not(:focus-within) { opacity: 0; transform: translateY(24px); }
+@media (max-width: 980px) {
+    .handwritten-page .subnav-bar { position: static; display: block; width: auto; max-height: none; margin: 132px 16px 16px; overflow-x: auto; overflow-y: hidden; }
+    .handwritten-page .subnav-bar ul { width: max-content; flex-direction: row; flex-wrap: nowrap; padding: 0; }
+    .handwritten-page .subnav-bar ul::before { display: none; }
+    .handwritten-page .subnav-bar li { margin: 0 8px 0 0; }
+    .handwritten-page .subnav-bar button.menu-btn { width: auto; padding: 10px 14px; white-space: nowrap; font-size: 14px; }
+    .handwritten-page .subnav-bar button.menu-btn::before { display: none; }
+    .handwritten-page .subnav-bar button.menu-btn.active { box-shadow: inset 0 -2px currentColor !important; }
+    .handwritten-page .general-content { width: calc(100% - 32px) !important; min-height: 0 !important; margin: 16px !important; padding: 20px !important; }
+    .handwritten-page .general-content { scroll-margin-top: 132px; }
+    .handwritten-page .general-content .expand-menu-header { position: static !important; right: auto !important; width: 100% !important; min-width: 0 !important; max-width: none !important; margin: 10px 0 !important; }
+    .handwritten-page .general-content { padding: 28px 20px !important; }
+}
+
+
+
+@media (max-width: 600px) { .lab-notebook .notebook-doodle { width: 52px; height: 52px; } .lab-notebook .protocol-table { font-size: 16px; } }
+@media (prefers-reduced-motion: reduce) {
+ .flow-motion .flow-reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+ .flow-chain { animation: none !important; }
+ .flow-doodle, .flow-doodle > svg { transform: none !important; will-change: auto; }
+}

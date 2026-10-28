@@ -3,6 +3,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 const root = path.resolve(__dirname, '..');
+const motionSource = fs.readFileSync(path.join(root, 'js/handwritten.js'), 'utf8');
+const pageSource = motionSource + '\n' + fs.readFileSync(path.join(root, 'js/apply-overview.js'), 'utf8');
 const html = fs.readFileSync(path.join(root, 'apply.html'), 'utf8');
 const routes = [...html.matchAll(/data-flow-tab="(tab\d+)"/g)].map(match => match[1]);
 assert.equal([...html.matchAll(/data-flow-step="\d+"/g)].length, 8);
@@ -29,7 +31,7 @@ const context = {
         getElementById(id) { return {scrollIntoView(options) { assert.equal(options.block, 'start'); scrolled = id; }}; }
     }
 };
-vm.runInNewContext(fs.readFileSync(path.join(root, 'js/apply-overview.js'), 'utf8'), context);
+vm.runInNewContext(pageSource, context);
 handleClick({target: {closest() {return null;}}});
 assert.equal(lookups, 0, 'Unrelated clicks must be ignored');
 for (const route of new Set(routes)) {
@@ -41,10 +43,10 @@ for (const route of new Set(routes)) {
 const beforeUnknown = selected;
 handleClick({target: {closest() {return {dataset: {flowTab: 'tab99'}};}}});
 assert.equal(selected, beforeUnknown, 'Unknown destinations must be ignored');
-assert.equal([...html.matchAll(/class="flow-doodle"/g)].length, 3, 'Keep only three small illustrations');
+assert.equal([...html.matchAll(/class="flow-doodle"/g)].length, 8, 'One small illustration for each of the eight stages');
 const font = fs.readFileSync(path.join(root, 'fonts/application-hand.woff2'));
 assert.equal(font.subarray(0, 4).toString(), 'wOF2', 'The handwriting font must be a valid local webfont');
-assert.ok(font.length < 350000, 'Use a text-specific subset instead of a full Chinese font');
+assert.ok(font.length < 600000, 'Use a text-specific subset for the two pages instead of a full Chinese font');
 assert.ok(fs.readFileSync(path.join(root, 'fonts/application-hand-OFL.txt'), 'utf8').includes('SIL OPEN FONT LICENSE'));
 
 function runMotion({reduced = false, supported = true} = {}) {
@@ -52,9 +54,11 @@ function runMotion({reduced = false, supported = true} = {}) {
     const steps = Array.from({length: 10}, () => ({classList: classes()}));
     const chapterParagraph = {classList: classes()};
     const tallTimeline = {classList: classes()};
+    const labParagraph = {classList: classes()};
     const body = {classList: classes()};
-    const positions = [-5000, 0, 5000];
+    const positions = [-5000, -1000, 0, 500, 1000, 2000, 3000, 5000];
     const drawings = positions.map(top => ({
+        classList: classes(),
         parentElement: {getBoundingClientRect() {return {top, height: 230};}},
         style: {setProperty(key, value) {this[key] = value;}}
     }));
@@ -79,9 +83,14 @@ function runMotion({reduced = false, supported = true} = {}) {
         observe(step) {observed.add(step);}
         unobserve(step) {observed.delete(step);}
     };
-    const document = {body, addEventListener() {}, getElementById() {return overview;}, querySelectorAll() {return [...steps, chapterParagraph, tallTimeline];}};
-    vm.runInNewContext(fs.readFileSync(path.join(root, 'js/apply-overview.js'), 'utf8'), {window, document});
-    return {overview, body, steps, chapterParagraph, tallTimeline, drawings, events, frames, observed, preference, reveal};
+    const document = {body, addEventListener() {}, getElementById() {return overview;}, querySelectorAll(selector) {
+        assert.ok(!/(^|,)\s*\.flow-step\s*(,|$)/.test(selector), 'Never hide an entire step with its timeline segment');
+        assert.ok(!selector.includes('.flow-connector') && !selector.includes('.flow-card-top') && !selector.includes('.flow-number'), 'The timeline spine and numbers must appear before annotations');
+        assert.ok(selector.includes('.lab-notebook'), 'The laboratory notebook shares the text reveal');
+        return [...steps, ...drawings, chapterParagraph, tallTimeline, labParagraph];
+    }};
+    vm.runInNewContext(pageSource, {window, document});
+    return {overview, body, steps, chapterParagraph, tallTimeline, labParagraph, drawings, events, frames, observed, preference, reveal};
 }
 for (const options of [{reduced: true}, {supported: false}]) {
     const state = runMotion(options);
@@ -89,9 +98,9 @@ for (const options of [{reduced: true}, {supported: false}]) {
     assert.equal(state.frames.length, 0);
 }
 const motion = runMotion();
-assert.equal(motion.observed.size, 12);
+assert.equal(motion.observed.size, motion.steps.length + motion.drawings.length + 3);
 assert.equal(motion.body.classList.contains('flow-motion'), true);
-for (const chapter of [motion.chapterParagraph, motion.tallTimeline]) {
+for (const chapter of [motion.chapterParagraph, motion.tallTimeline, motion.labParagraph]) {
     assert.ok(motion.observed.has(chapter), 'Detailed chapters must use the same scroll reveal');
     motion.reveal([{target: chapter, isIntersecting: true}]);
     assert.ok(chapter.classList.contains('is-visible'));
@@ -104,9 +113,20 @@ motion.events.scroll(); motion.events.scroll();
 assert.equal(motion.frames.length, 1, 'Coalesce scroll updates into one animation frame');
 motion.frames.shift()();
 const shifts = motion.drawings.map(item => parseFloat(item.style['--parallax-y']));
-assert.ok(shifts[0] > shifts[1] && shifts[1] > shifts[2]);
+assert.ok(shifts[0] > shifts[2] && shifts[2] > shifts[7]);
 assert.ok(shifts.every(value => Math.abs(value) <= 28), 'Parallax must stay subtle');
 motion.preference.matches = true;
 motion.events.scroll(); motion.frames.shift()();
 assert.deepEqual(motion.drawings.map(item => parseFloat(item.style['--parallax-y'])), shifts, 'Stop updating when reduced motion is enabled');
-console.log('8 steps, 3 drawings, chapter navigation, full-guide reveal, tall tables, bounded parallax and reduced-motion fallback: passed');
+const lab = fs.readFileSync(path.join(root, 'protocols.html'), 'utf8');
+assert.ok(lab.includes('class="handwritten-page lab-notebook"'));
+assert.equal([...lab.matchAll(/class="expand-menu-header"/g)].length, 30);
+assert.equal([...lab.matchAll(/class="expand-menu overview-menu open"/g)].length, 5);
+assert.equal([...lab.matchAll(/class="protocol-table"/g)].length, 49, 'Retain every laboratory table');
+assert.ok(!lab.includes('<div class="expand-menu-header"'), 'Chapter controls must support native keyboard input');
+for (const page of [html, lab]) {
+    assert.ok(page.includes('css/handwritten.css'));
+    assert.ok(page.includes('js/handwritten.js'));
+}
+assert.ok(fs.statSync(path.join(root, 'images/paper/parchment.webp')).size < 150000, 'Reuse one small paper texture');
+console.log('Timeline-first reveal, 8 drawings, both handwritten pages, preserved lab tables, navigation, parallax and reduced-motion fallback: passed');

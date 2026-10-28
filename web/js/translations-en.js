@@ -5065,3 +5065,7 @@ window.siteEnglishTranslations = Object.freeze({
   "：65 个文件，约 248.8 MB": ": 65 files , approximately 248.8 MB",
   "：79 个文件，约 512.9 MB": ": 79 files , approximately 512.9 MB"
 });
+
+window.siteEnglishTranslations = Object.freeze(Object.assign({}, window.siteEnglishTranslations, {
+  "重新整理。原文档的一级标题被整理为左侧分类，二级标题被整理为可展开的章节，三级和四级标题保留为页内小节。": "The document’s top-level headings form the categories on the left; second-level headings become expandable chapters, while third- and fourth-level headings remain subsections on the page."
+}));

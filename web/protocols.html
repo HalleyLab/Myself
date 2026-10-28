@@ -5,15 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/protocols.css"/>
     <link rel="stylesheet" href="css/notebook.css"/>
+    <link rel="stylesheet" href="css/handwritten.css?v=20261028-paper">
+    <link rel="preload" href="fonts/application-hand.woff2?v=20261028-paper" as="font" type="font/woff2" crossorigin>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/typed.js@2.0.132/dist/typed.umd.js"></script>
-    <script src="js/translations-en.js?v=20261012-final" defer></script>
+    <script src="js/translations-en.js?v=20261028-paper" defer></script>
     <script src="js/definition.js?v=20261012-final" defer></script>
     <script src="js/function.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <title>个人分享</title>
+<script src="js/handwritten.js?v=20261028-paper" defer></script>
 </head>
-<body>
+<body class="handwritten-page lab-notebook">
     <header>
       <div class="btnMenu"><i></i><i></i><i></i></div>
       <nav>
@@ -28,6 +31,7 @@
                   <li><a href="selective.html">专业选修</a></li>
                   <li><a href="others.html">其他课程</a></li>
                   <li><a href="mixed.html">二三四课堂</a></li>
+                  <li><a href="notes.html">学习笔记</a></li>
                 </ul>
               </li>
               <li class="nav-group">
@@ -45,7 +49,7 @@
     </header>
 
     <div class="group">
-        <svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><g><path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path></g></svg>
+        <svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><g><path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path></g></svg>
         <input type="Search" class="input" placeholder="搜索内容">
         <span class="search-tip">搜索功能为文本匹配，存在该内容则自动跳转，建议输入单个短关键词</span>
     </div>
@@ -54,18 +58,18 @@
 
     <div class="subnav-bar">
       <ul>
-        <li><a class="menu-btn active" data-tab="tab0">概述</a></li>
-        <li><a class="menu-btn" data-tab="tab1">管理规定</a></li>
-        <li><a class="menu-btn" data-tab="tab2">实验设计</a></li>
-        <li><a class="menu-btn" data-tab="tab3">仪器操作</a></li>
-        <li><a class="menu-btn" data-tab="tab4">实验方法</a></li>
+        <li><button class="menu-btn active" data-tab="tab0" type="button" aria-controls="tab0">概述</button></li>
+        <li><button class="menu-btn" data-tab="tab1" type="button" aria-controls="tab1">管理规定</button></li>
+        <li><button class="menu-btn" data-tab="tab2" type="button" aria-controls="tab2">实验设计</button></li>
+        <li><button class="menu-btn" data-tab="tab3" type="button" aria-controls="tab3">仪器操作</button></li>
+        <li><button class="menu-btn" data-tab="tab4" type="button" aria-controls="tab4">实验方法</button></li>
       </ul>
     </div>
 
-    <div class="general-content active" id="tab0">
-        <h2>概述</h2>
-        <hr>
-        <p>本页根据 <b>实验操作备忘录.docx</b> 重新整理。原文档的一级标题被整理为左侧分类，二级标题被整理为右侧书签，三级和四级标题保留为书页内的小节。</p>
+    <main><div class="general-content active" id="tab0">
+        <div class="expand-menu overview-menu open"><button type="button" class="expand-menu-header">概述<span class="expand-arrow">▼</span></button><div class="expand-menu-body"><div class="notebook-heading"><div><span class="paper-kicker">LAB NOTEBOOK</span><h2>实验手册</h2>
+        </div><svg class="notebook-doodle" viewbox="0 0 120 120" aria-hidden="true" focusable="false"><path d="m43 12 34 1 M49 14l-1 32-26 47q-4 11 9 12l59-1q12-1 7-12L70 45l1-31 M37 73q12-9 25-1t22-2 M43 85l3 1 M72 91l2 1 M52 61l2-1 M76 80l3 1"></path></svg></div><hr>
+        <p>本页根据 <b>实验操作备忘录.docx</b> 重新整理。原文档的一级标题被整理为左侧分类，二级标题被整理为可展开的章节，三级和四级标题保留为页内小节。</p>
         <p>页面保留实验室管理、动物设施、仪器操作、组织/分子/细胞/电生理实验以及试剂配制等结构。涉及实验室准入、伦理审批、危化品和动物设施的内容仍应以当前平台和课题组规定为准。</p>
         <div class="protocol-overview-grid">
           <section><h3>管理规定</h3><p>5 个流程书签：实验室基本使用规范、动物实验申请及实验室使用流程、高压蒸汽灭菌与洗消间使用、实验动物与屏障设施等。</p></section>
@@ -73,15 +77,15 @@
           <section><h3>仪器操作</h3><p>9 个流程书签：共聚焦、荧光倒置显微镜、CO2 培养箱、流式细胞仪、切片机、酶标仪等。</p></section>
           <section><h3>实验方法</h3><p>10 个流程书签：小鼠解剖、立体定位、免疫组化、载体构建、分析测试、电生理、试剂配制和细胞培养。</p></section>
         </div>
-    </div>
+    </div></div></div>
 
     <div class="general-content" id="tab1">
-        <h2>实验室使用及管理规定</h2>
+        <div class="expand-menu overview-menu open"><button type="button" class="expand-menu-header">概述<span class="expand-arrow">▼</span></button><div class="expand-menu-body"><h2>实验室使用及管理规定</h2>
         <hr>
         <p class="protocol-text">这一部分整理实验室日常使用、试剂耗材、质粒、抗体、动物实验申请和屏障设施相关规范。</p>
 
-        <div class="expand-menu">
-          <div class="expand-menu-header">实验室基本使用规范<span class="expand-arrow">▼</span></div>
+        </div></div><div class="expand-menu">
+          <button class="expand-menu-header" type="button">实验室基本使用规范<span class="expand-arrow">▼</span></button>
           <div class="expand-menu-body">
             <h3 class="protocol-subtitle" id="试剂耗材管理与物品存放">试剂耗材管理与物品存放</h3>
 <p class="protocol-text">【以下信息可能不符合实验室实际情况】</p>
@@ -123,7 +127,7 @@
           </div>
         </div>
         <div class="expand-menu">
-          <div class="expand-menu-header">动物实验申请及实验室使用流程<span class="expand-arrow">▼</span></div>
+          <button class="expand-menu-header" type="button">动物实验申请及实验室使用流程<span class="expand-arrow">▼</span></button>
           <div class="expand-menu-body">
             <h3 class="protocol-subtitle" id="基础知识">基础知识</h3>
 <p class="protocol-text">【以下信息可能不符合实验室实际情况】实验动物要求遗传背景明确、来源清晰，根据洁净度可分为4个级别：基础动物、清洁动物、SPF（无特定病原体）动物、无菌动物。级别的划分参照国家标准对病原体进行检测。</p>
@@ -189,7 +193,7 @@
           </div>
         </div>
         <div class="expand-menu">
-          <div class="expand-menu-header">高压蒸汽灭菌与洗消间使用<span class="expand-arrow">▼</span></div>
+          <button class="expand-menu-header" type="button">高压蒸汽灭菌与洗消间使用<span class="expand-arrow">▼</span></button>
           <div class="expand-menu-body">
             <p class="protocol-text">【以下信息可能不符合实验室实际情况】</p>
 <p class="protocol-text">按照研究院规定，实验室不可进行自行灭菌，必须在洗消间进行统一灭菌。</p>
@@ -204,7 +208,7 @@
           </div>
         </div>
         <div class="expand-menu">
-          <div class="expand-menu-header">实验动物与屏障设施<span class="expand-arrow">▼</span></div>
+          <button class="expand-menu-header" type="button">实验动物与屏障设施<span class="expand-arrow">▼</span></button>
           <div class="expand-menu-body">
             <h3 class="protocol-subtitle" id="实验动物分类">实验动物分类</h3>
 <p class="protocol-text">动物分为野生动物、观赏动物和实验动物；</p>
@@ -231,7 +235,7 @@
           </div>
         </div>
         <div class="expand-menu">
-          <div class="expand-menu-header">委托实验<span class="expand-arrow">▼</span></div>
+          <button class="expand-menu-header" type="button">委托实验<span class="expand-arrow">▼</span></button>
           <div class="expand-menu-body">
             <h3 class="protocol-subtitle" id="合成">合成</h3>
 <h4 class="protocol-minititle">引物合成</h4>
@@ -253,12 +257,12 @@
     </div>
 
     <div class="general-content" id="tab2">
-        <h2>实验设计</h2>
+        <div class="expand-menu overview-menu open"><button type="button" class="expand-menu-header">概述<span class="expand-arrow">▼</span></button><div class="expand-menu-body"><h2>实验设计</h2>
         <hr>
         <p class="protocol-text">这一部分集中于分子实验设计，尤其是各类引物设计的目标、场景和注意事项。</p>
 
-        <div class="expand-menu">
-          <div class="expand-menu-header">分子相关实验设计<span class="expand-arrow">▼</span></div>
+        </div></div><div class="expand-menu">
+          <button class="expand-menu-header" type="button">分子相关实验设计<span class="expand-arrow">▼</span></button>
           <div class="expand-menu-body">
             <h3 class="protocol-subtitle" id="引物设计">引物设计</h3>
 <h4 class="protocol-minititle">用于qPCR的引物设计</h4>
@@ -291,12 +295,12 @@
     </div>
 
     <div class="general-content" id="tab3">
-        <h2>实验仪器操作</h2>
+        <div class="expand-menu overview-menu open"><button type="button" class="expand-menu-header">概述<span class="expand-arrow">▼</span></button><div class="expand-menu-body"><h2>实验仪器操作</h2>
         <hr>
         <p class="protocol-text">这一部分按仪器分类，整理显微成像、细胞培养箱、流式、切片、分光光度和酶标仪等操作要点。</p>
 
-        <div class="expand-menu">
-          <div class="expand-menu-header">激光共聚焦显微镜LSM 710 NLO<span class="expand-arrow">▼</span></div>
+        </div></div><div class="expand-menu">
+          <button class="expand-menu-header" type="button">激光共聚焦显微镜LSM 710 NLO<span class="expand-arrow">▼</span></button>
           <div class="expand-menu-body">
             <p class="protocol-text">【以下信息可能不符合实验室实际情况】</p>
 <h3 class="protocol-subtitle" id="使用规则">使用规则</h3>
@@ -343,7 +347,7 @@
           </div>
         </div>
         <div class="expand-menu">
-          <div class="expand-menu-header">荧光倒置显微镜<span class="expand-arrow">▼</span></div>
+          <button class="expand-menu-header" type="button">荧光倒置显微镜<span class="expand-arrow">▼</span></button>
           <div class="expand-menu-body">
             <p class="protocol-text">注意：荧光倒置显微镜拍摄的照片具有多层叠加的情况，不能用于免疫组化后的组织切片观察。无CO2时，仅能用于单层生长或近似单层生长的细胞爬片等的观察。</p>
 <p class="protocol-text">注意：此台显微镜因设备自身问题，拍摄画面左右方向有模糊。</p>
@@ -357,7 +361,7 @@
           </div>
         </div>
         <div class="expand-menu">
-          <div class="expand-menu-header">恒温CO2细胞培养箱<span class="expand-arrow">▼</span></div>
+          <button class="expand-menu-header" type="button">恒温CO2细胞培养箱<span class="expand-arrow">▼</span></button>
           <div class="expand-menu-body">
             <h3 class="protocol-subtitle" id="常规使用方法">常规使用方法</h3>
 <p class="protocol-text">钢瓶气阀开启后，点按Mode由Run进入Set模式，左右键切换Set选项，上下键调节CO2和温度。</p>
@@ -373,7 +377,7 @@
           </div>
         </div>
         <div class="expand-menu">
-          <div class="expand-menu-header">流式细胞仪（分析）<span class="expand-arrow">▼</span></div>
+          <button class="expand-menu-header" type="button">流式细胞仪（分析）<span class="expand-arrow">▼</span></button>
           <div class="expand-menu-body">
             <p class="protocol-text">【以下信息可能不符合实验室实际情况】</p>
 <h3 class="protocol-subtitle" id="样品预处理">样品预处理</h3>
@@ -386,7 +390,7 @@
           </div>
         </div>
         <div class="expand-menu">
-          <div class="expand-menu-header">震动切片 Leica VT 1200S<span class="expand-arrow">▼</span></div>
+          <button class="expand-menu-header" type="button">震动切片 Leica VT 1200S<span class="expand-arrow">▼</span></button>
           <div class="expand-menu-body">
             <h3 class="protocol-subtitle" id="震动切片与冰冻切片的比较">震动切片与冰冻切片的比较</h3>
 <div class="protocol-table-wrap"><table class="protocol-table">
@@ -410,7 +414,7 @@
           </div>
         </div>
         <div class="expand-menu">
-          <div class="expand-menu-header">冰冻切片Leica CM3050S<span class="expand-arrow">▼</span></div>
+          <button class="expand-menu-header" type="button">冰冻切片Leica CM3050S<span class="expand-arrow">▼</span></button>
           <div class="expand-menu-body">
             <p class="protocol-text">【适用于脑组织的冰冻切片方案详见单独的文件】</p>
 <h3 class="protocol-subtitle" id="样品预处理">样品预处理</h3>
@@ -426,7 +430,7 @@
           </div>
         </div>
         <div class="expand-menu">
-          <div class="expand-menu-header">分光光度与酶标法<span class="expand-arrow">▼</span></div>
+          <button class="expand-menu-header" type="button">分光光度与酶标法<span class="expand-arrow">▼</span></button>
           <div class="expand-menu-body">
             <h3 class="protocol-subtitle" id="nanodrop-spectrophotometer">Nanodrop Spectrophotometer</h3>
 <ul class="protocol-list"><li>Open Nanodrop software, choose the corresponding application.</li><li>Lift arm and apply 1ul of ddH2O, close the arm lightly, continue the program, waiting for hardware auto-change.</li><li>Wipe water off with a dry kimwipe, apply 1ul of solution, then make blank measurement.</li><li>*the solution is the buffer your sample dissolved in.</li><li>Wipe the solution and load your samples one by one, after loading each sample, run “measure” program and write down the concentration on the side of EP tube.</li><li>After testing all samples, use 1ul of ddH2O to wash the machine, put a paper of kimwipe between the arm and loading pore.</li></ul>
@@ -437,7 +441,7 @@
           </div>
         </div>
         <div class="expand-menu">
-          <div class="expand-menu-header">超速离心机<span class="expand-arrow">▼</span></div>
+          <button class="expand-menu-header" type="button">超速离心机<span class="expand-arrow">▼</span></button>
           <div class="expand-menu-body">
             <p class="protocol-text">使用时必须有人值守！</p>
 <p class="protocol-text">部分离心管不具有盖子，若要达到洁净效果，需提前将待使用的样品管进行灭菌，将样品在超净台上转移至离心管中，将离心管插入样品管后旋紧螺栓，再拿出超净台。</p>
@@ -446,7 +450,7 @@
           </div>
         </div>
         <div class="expand-menu">
-          <div class="expand-menu-header">酶标仪<span class="expand-arrow">▼</span></div>
+          <button class="expand-menu-header" type="button">酶标仪<span class="expand-arrow">▼</span></button>
           <div class="expand-menu-body">
             <h3 class="protocol-subtitle" id="bca法测蛋白浓度">BCA法测蛋白浓度</h3>
 <h4 class="protocol-minititle">样品处理</h4>
@@ -467,12 +471,12 @@
     </div>
 
     <div class="general-content" id="tab4">
-        <h2>实验方法</h2>
+        <div class="expand-menu overview-menu open"><button type="button" class="expand-menu-header">概述<span class="expand-arrow">▼</span></button><div class="expand-menu-body"><h2>实验方法</h2>
         <hr>
         <p class="protocol-text">这一部分是备忘录的主体，覆盖动物、组织、分子、蛋白、RNA、电生理、试剂和细胞培养流程。</p>
 
-        <div class="expand-menu">
-          <div class="expand-menu-header">小鼠解剖实验<span class="expand-arrow">▼</span></div>
+        </div></div><div class="expand-menu">
+          <button class="expand-menu-header" type="button">小鼠解剖实验<span class="expand-arrow">▼</span></button>
           <div class="expand-menu-body">
             <h3 class="protocol-subtitle" id="常规操作">常规操作</h3>
 <h4 class="protocol-minititle">用具准备</h4>
@@ -537,7 +541,7 @@
           </div>
         </div>
         <div class="expand-menu">
-          <div class="expand-menu-header">小动物立体定位台相关实验<span class="expand-arrow">▼</span></div>
+          <button class="expand-menu-header" type="button">小动物立体定位台相关实验<span class="expand-arrow">▼</span></button>
           <div class="expand-menu-body">
             <h3 class="protocol-subtitle" id="立体定位台简介-使用规范和注意事项">立体定位台简介、使用规范和注意事项</h3>
 <h4 class="protocol-minititle">简介</h4>
@@ -596,7 +600,7 @@
           </div>
         </div>
         <div class="expand-menu">
-          <div class="expand-menu-header">流式细胞分选<span class="expand-arrow">▼</span></div>
+          <button class="expand-menu-header" type="button">流式细胞分选<span class="expand-arrow">▼</span></button>
           <div class="expand-menu-body">
             <h3 class="protocol-subtitle" id="样本处理">样本处理</h3>
 <p class="protocol-note">*严格记录溶液体积，溶液体积用于计算整骨的细胞数量</p>
@@ -605,7 +609,7 @@
           </div>
         </div>
         <div class="expand-menu">
-          <div class="expand-menu-header">免疫组化<span class="expand-arrow">▼</span></div>
+          <button class="expand-menu-header" type="button">免疫组化<span class="expand-arrow">▼</span></button>
           <div class="expand-menu-body">
             <h3 class="protocol-subtitle" id="适用于骨组织的组化方案">适用于骨组织的组化方案</h3>
 <p class="protocol-text">此处展示femur免疫组化流程，对于其他软组织样品过程类似，存在以下不同：</p>
@@ -662,7 +666,7 @@
           </div>
         </div>
         <div class="expand-menu">
-          <div class="expand-menu-header">细菌培养与载体构建相关操作<span class="expand-arrow">▼</span></div>
+          <button class="expand-menu-header" type="button">细菌培养与载体构建相关操作<span class="expand-arrow">▼</span></button>
           <div class="expand-menu-body">
             <p class="protocol-text">细菌培养超净台使用前应当开启紫外30min，使用后也应该开启紫外。使用过程中注意酒精灯需点燃。注意超净台内的枪头必须与超净台外的枪头严格区分。</p>
 <h3 class="protocol-subtitle" id="lb培养基配制">LB培养基配制</h3>
@@ -757,7 +761,7 @@
           </div>
         </div>
         <div class="expand-menu">
-          <div class="expand-menu-header">动物行为学实验<span class="expand-arrow">▼</span></div>
+          <button class="expand-menu-header" type="button">动物行为学实验<span class="expand-arrow">▼</span></button>
           <div class="expand-menu-body">
             <h3 class="protocol-subtitle" id="待整理-cfc">【待整理】CFC</h3>
 <p class="protocol-note">*本实验用于对动物形成瞬时的强记忆，进行CFC的动物在数小时后脑中相应的脑区将表达c-fos等即早基因，相应的神经元将激活。可用于研究体内神经元激活的情况，或根据实验过程中设置的阈值测算的动物Freezing水平研究小鼠长期/短期记忆受损的情况。</p>
@@ -770,7 +774,7 @@
           </div>
         </div>
         <div class="expand-menu">
-          <div class="expand-menu-header">分析测试操作<span class="expand-arrow">▼</span></div>
+          <button class="expand-menu-header" type="button">分析测试操作<span class="expand-arrow">▼</span></button>
           <div class="expand-menu-body">
             <h3 class="protocol-subtitle" id="鼠尾genotyping">鼠尾genotyping</h3>
 <ul class="protocol-list"><li>抓取小鼠，检查小鼠编号和性别，或者依次编号。</li><li>取一1.5ml EP管，手术剪剪下小鼠尾部约数毫米，放于EP管中。管壁上写清鼠笼号和小鼠编号。</li><li>*也可使用小鼠打耳标或剪脚趾的组织</li><li>加入300ul 50mM NaOH溶液，于95摄氏度金属浴上放置2h，以裂解组织。</li><li>冷却至室温，加入25ul tris-HCl 缓冲液（pH~7.4）以中和溶液。</li><li>*如需保存，此时可放置于4摄氏度保存一周以内</li><li>*以上为粗提取DNA的方法，如后续结果不佳，可使用精提DNA的方法</li><li>使用nanodrop测试粗提取的DNA含量，正常情况下获得的DNA含量～200ng/ul，建议稀释至50ng/ul 后再进行PCR。</li><li>配制PCR体系：2*Mix 7.5ul，引物各加1ul，DNA加0.5~1ul，剩下用水补齐。</li><li>*引物浓度应当为10uM，即依照冻干粉上的体积加入水溶解后，还应当再稀释十倍后使用</li><li>*建议在超净台上加</li><li>*此外，还需要水、阴性对照和阳性对照，阴性对照即为WT小鼠鼠尾裂解液，阳性对照为该品系预先保存的杂合小鼠，水对照即使用水代替DNA配制PCR体系。</li><li>选用Jackon lab的标准PCR流程进行扩增。</li><li>*标准循环数为25个，如PCR条带过暗，可以调至28~30个循环</li><li>使用1.5% 琼脂糖凝胶，选用小孔梳齿，110V 40min进行电泳。</li><li>*左侧台的电泳槽较干净</li></ul>
@@ -1029,7 +1033,7 @@
           </div>
         </div>
         <div class="expand-menu">
-          <div class="expand-menu-header">电生理学<span class="expand-arrow">▼</span></div>
+          <button class="expand-menu-header" type="button">电生理学<span class="expand-arrow">▼</span></button>
           <div class="expand-menu-body">
             <h3 class="protocol-subtitle" id="微电极的制备">微电极的制备</h3>
 <h4 class="protocol-minititle">微电极控制仪的使用方法及电极的镜下检查</h4>
@@ -1106,7 +1110,7 @@
           </div>
         </div>
         <div class="expand-menu">
-          <div class="expand-menu-header">试剂配制方法<span class="expand-arrow">▼</span></div>
+          <button class="expand-menu-header" type="button">试剂配制方法<span class="expand-arrow">▼</span></button>
           <div class="expand-menu-body">
             <h3 class="protocol-subtitle" id="使用液">使用液</h3>
 <h4 class="protocol-minititle">脑片防冻液（250ml）</h4>
@@ -1318,7 +1322,7 @@
           </div>
         </div>
         <div class="expand-menu">
-          <div class="expand-menu-header">细胞培养操作<span class="expand-arrow">▼</span></div>
+          <button class="expand-menu-header" type="button">细胞培养操作<span class="expand-arrow">▼</span></button>
           <div class="expand-menu-body">
             <h3 class="protocol-subtitle" id="试剂一览表-初始">试剂一览表（初始）</h3>
 <h4 class="protocol-minititle">DMSO</h4>
@@ -1485,5 +1489,6 @@
           </div>
         </div>
     </div>
-</body>
+</main></body>
+
 </html>
