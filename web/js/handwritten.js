@@ -31,8 +31,8 @@
         queueParallax();
     }, {threshold: 0, rootMargin: '0px 0px -5% 0px'});
 
-    // Reveal annotations independently so the complete timeline spine and numbers stay visible.
-    document.querySelectorAll('.flow-card > strong, .flow-card > .flow-copy, .flow-card > .flow-period, .flow-doodle, .flow-parallel, .flow-decisions, .abroad-guide .general-content:not(#tab0) .expand-menu-body > :not(.bookmark-page-title), .lab-notebook .expand-menu-body > :not(hr):not(.protocol-overview-grid):not(.bookmark-page-title), .lab-notebook .protocol-overview-grid > section').forEach(function(step) {
+    // Keep the complete timeline and its labels visible; reveal decorative drawings and reading sections.
+    document.querySelectorAll('.flow-doodle, .flow-parallel, .flow-decisions, .abroad-guide .general-content:not(#tab0) .expand-menu-body > :not(.bookmark-page-title), .lab-notebook .expand-menu-body > :not(hr):not(.protocol-overview-grid):not(.bookmark-page-title), .lab-notebook .protocol-overview-grid > section').forEach(function(step) {
         step.classList.add('flow-reveal');
         observer.observe(step);
     });

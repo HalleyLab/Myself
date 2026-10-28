@@ -1,16 +1,16 @@
 @font-face { font-family: "Application Hand"; src: url("../fonts/application-hand.woff2?v=20261028-paper") format("woff2"); font-weight: 400; font-display: swap; }
-/* The same paper, ink and handwriting continue through all ten chapters. */
+/* Shared handwriting; neutral paper for study abroad and parchment for the laboratory. */
 body.handwritten-page {
- --paper-wash: rgba(249, 245, 235, .56); --guide-paper: #f9f5eb; --guide-rule: #c6ccc0;
- --flow-ink: #254d50; --flow-muted: #776b52;
- --background-color: #f9f5eb; --text-color: #304344;
- background: linear-gradient(var(--paper-wash), var(--paper-wash)), url("../images/paper/parchment.webp"), var(--guide-paper) !important; background-size: auto, 768px 768px, auto !important; background-attachment: scroll !important;
+ --guide-paper: #f4f5f6; --guide-rule: #c5d0d3; --flow-ink: #2a5058; --flow-muted: #52636c;
+ --background-color: #f4f5f6; --text-color: #2e3f46;
+ --control-surface: #fcfdfd; --control-border: #7b8e95; --control-hover: #e6ecee; --control-focus: #365e6b; --control-shadow: 0 3px 12px rgba(37, 61, 69, .07);
+ background: var(--guide-paper) !important; background-size: auto !important; background-attachment: scroll !important;
  color: var(--text-color); font-family: "Application Hand", "Kaiti", "KaiTi", cursive;
 }
 body.handwritten-page.dark-theme, .dark-theme body.handwritten-page {
- --paper-wash: rgba(35, 42, 42, .94); --guide-paper: #232a2a; --guide-rule: #516260;
- --flow-ink: #a8d0c7; --flow-muted: #c3b69a;
- --background-color: #232a2a; --text-color: #e1e6de;
+ --guide-paper: #20262a; --guide-rule: #52656c; --flow-ink: #afd5da; --flow-muted: #a8bbc0;
+ --background-color: #20262a; --text-color: #e8eff0;
+ --control-surface: #2b3439; --control-border: #82989f; --control-hover: #35464c; --control-focus: #b3dce0; --control-shadow: 0 3px 12px rgba(0, 0, 0, .16);
 }
 .handwritten-page .general-content {
  width: calc(80% - 48px) !important; max-width: 1450px !important; min-height: 0 !important;
@@ -60,19 +60,37 @@ body.handwritten-page.dark-theme, .dark-theme body.handwritten-page {
 .handwritten-page .general-content .expand-menu-body .download-link,
 .handwritten-page .general-content .expand-menu-body .download-link:hover { display: inline; margin: 4px 16px 4px 0; padding: 0 0 2px; border: 0; border-bottom: 1px dashed var(--flow-ink); border-radius: 0; background: none; box-shadow: none; color: var(--flow-ink); font-size: 16px; line-height: 2; }
 .handwritten-page nav { background: var(--guide-paper); backdrop-filter: none; }
-.handwritten-page nav ul li a, .handwritten-page nav ul li.nav-group .nav-submenu a { color: var(--text-color) !important; font-family: inherit; font-weight: 400; }
+.handwritten-page nav ul li a, .handwritten-page nav ul li.nav-group .nav-submenu a { color: var(--text-color) !important; font-family: inherit; font-weight: 800 !important; }
 .handwritten-page nav .nav-submenu { background: var(--guide-paper); }
 .handwritten-page header .btnMenu i { background: var(--flow-ink) !important; }
-.handwritten-page .language-switcher, .handwritten-page .theme-switcher { border: 0; border-bottom: 1px solid var(--guide-rule); border-radius: 0; background: var(--guide-paper) !important; color: var(--flow-ink) !important; box-shadow: none !important; font-family: inherit; font-size: 17px; font-weight: 400; }
-.handwritten-page .group.site-search .input { border: 0; border-bottom: 1px solid var(--guide-rule); border-radius: 0; background: var(--guide-paper) !important; color: var(--text-color); box-shadow: none !important; font-family: inherit; font-size: 17px; }
-.handwritten-page .site-search-results { border: 1px solid var(--guide-rule); border-radius: 0; background: var(--guide-paper) !important; color: var(--text-color) !important; box-shadow: none !important; }
+/* Fixed geometry keeps translated labels and the search field from colliding. */
+.handwritten-page .language-switcher, .handwritten-page .theme-switcher, .handwritten-page .group.site-search .input {
+ box-sizing: border-box; height: 40px; border: 1px solid var(--control-border) !important; border-radius: 8px;
+ background: var(--control-surface) !important; color: var(--text-color) !important; box-shadow: var(--control-shadow) !important;
+ font-family: inherit; font-size: 16px; font-weight: 400; animation: none !important;
+ transition: background-color .18s ease, border-color .18s ease;
+}
+.handwritten-page .language-switcher, .handwritten-page .theme-switcher { top: 20px; display: inline-flex; align-items: center; justify-content: center; padding: 0 10px; white-space: nowrap; }
+.handwritten-page .theme-switcher { right: 20px; width: 144px; min-width: 144px; max-width: 144px; }
+.handwritten-page .language-switcher { right: 176px; width: 96px; min-width: 96px; max-width: 96px; }
+.handwritten-page .group.site-search { top: 20px; right: 284px; width: clamp(220px, 22vw, 300px); max-width: none; height: 40px; animation: none !important; }
+.handwritten-page .group.site-search .input { width: 100%; padding: 0 14px 0 42px; line-height: normal; }
+.handwritten-page .group.site-search .input::placeholder { color: var(--flow-muted); opacity: 1; }
+.handwritten-page .group.site-search .icon { left: 14px; width: 18px; height: 18px; fill: var(--flow-ink); pointer-events: none; }
+.handwritten-page .language-switcher:hover, .handwritten-page .theme-switcher:hover,
+.handwritten-page .group.site-search .input:hover { background: var(--control-hover) !important; border-color: var(--control-focus) !important; transform: none; }
+.handwritten-page .language-switcher:focus-visible, .handwritten-page .theme-switcher:focus-visible,
+.handwritten-page .group.site-search .input:focus-visible { outline: 2px solid var(--control-focus); outline-offset: 3px; border-color: var(--control-focus) !important; }
+.handwritten-page .site-search-results { border: 1px solid var(--control-border); border-radius: 8px; background: var(--control-surface) !important; color: var(--text-color) !important; box-shadow: var(--control-shadow) !important; }
 .handwritten-page .site-search-result, .handwritten-page .site-search-status, .handwritten-page .site-search-empty { font-family: inherit; }
 .handwritten-page .site-search-result-title { color: var(--flow-ink) !important; font-weight: 400; }
 .handwritten-page .site-search-result-snippet, .handwritten-page .site-search-status, .handwritten-page .site-search-empty { color: var(--flow-muted) !important; }
+.handwritten-page .site-search-result:hover, .handwritten-page .site-search-result.is-active { background: var(--control-hover) !important; border-left-color: var(--control-focus) !important; }
+.handwritten-page .site-search-status kbd { border-color: var(--control-border); background: var(--control-hover); color: var(--text-color); }
 
 /* The laboratory notebook uses warmer parchment and brown pen ink. */
-body.lab-notebook { --paper-wash: rgba(243, 227, 199, .16); --guide-paper: #eee0c4; --guide-rule: #c4ad88; --flow-ink: #684b30; --flow-muted: #6f5840; --text-color: #493b2c; --background-color: #eee0c4; }
-body.lab-notebook.dark-theme, .dark-theme body.lab-notebook { --paper-wash: rgba(42, 35, 29, .94); --guide-paper: #2a231d; --guide-rule: #77624a; --flow-ink: #d5b885; --flow-muted: #c1ad90; --text-color: #eee2cc; --background-color: #2a231d; }
+body.lab-notebook { background: linear-gradient(var(--paper-wash), var(--paper-wash)), url("../images/paper/parchment.webp"), var(--guide-paper) !important; background-size: auto, 768px 768px, auto !important; --control-surface: #fff6e4; --control-border: #977c56; --control-hover: #ecddbd; --control-focus: #795a36; --control-shadow: 0 3px 12px rgba(89, 62, 26, .09); --paper-wash: rgba(243, 227, 199, .16); --guide-paper: #eee0c4; --guide-rule: #c4ad88; --flow-ink: #684b30; --flow-muted: #6f5840; --text-color: #493b2c; --background-color: #eee0c4; }
+body.lab-notebook.dark-theme, .dark-theme body.lab-notebook { background: linear-gradient(var(--paper-wash), var(--paper-wash)), url("../images/paper/parchment.webp"), var(--guide-paper) !important; background-size: auto, 768px 768px, auto !important; --control-surface: #fff6e4; --control-border: #977c56; --control-hover: #ecddbd; --control-focus: #795a36; --control-shadow: 0 3px 12px rgba(89, 62, 26, .09); --paper-wash: rgba(42, 35, 29, .94); --guide-paper: #2a231d; --guide-rule: #77624a; --flow-ink: #d5b885; --flow-muted: #c1ad90; --text-color: #eee2cc; --background-color: #2a231d; }
 .handwritten-page .menu-btn:focus-visible, .handwritten-page .expand-menu-header:focus-visible { outline: 2px dashed var(--flow-ink); outline-offset: 5px; }
 .lab-notebook #tab0 .overview-menu > .expand-menu-header { display: none !important; }
 .lab-notebook .notebook-heading { display: flex; justify-content: space-between; align-items: center; gap: 25px; margin-bottom: 25px; }
@@ -115,4 +133,11 @@ body.lab-notebook.dark-theme, .dark-theme body.lab-notebook { --paper-wash: rgba
  .flow-motion .flow-reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
  .flow-chain { animation: none !important; }
  .flow-doodle, .flow-doodle > svg { transform: none !important; will-change: auto; }
+}
+
+@media (max-width: 760px) {
+ .handwritten-page .theme-switcher { width: 128px; min-width: 128px; max-width: 128px; font-size: 14px; }
+ .handwritten-page .language-switcher { right: 160px; width: 80px; min-width: 80px; max-width: 80px; }
+ .handwritten-page .group.site-search { top: 76px; left: 20px; right: 20px; width: auto; }
+ .handwritten-page .site-search-results { position: fixed; top: 126px; left: 20px; right: 20px; width: auto; max-height: min(520px, calc(100vh - 146px)); }
 }

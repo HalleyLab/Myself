@@ -68,7 +68,7 @@
 .flow-connector { position: absolute; left: 9px; top: 66px; width: 36px; height: calc(100% - 84px); color: var(--flow-ink); opacity: .55; }
 .flow-step:nth-child(even) .flow-connector { transform: scaleX(-1); }
 .flow-doodle { display: block; position: absolute; right: 0; top: 12px; width: 65px; height: 65px; color: var(--flow-ink); opacity: .65; pointer-events: none; }
-.flow-step-4 .flow-doodle { width: 60px; height: 60px; }
+.flow-step-4 > .flow-doodle:not(.flow-doodle-small) { width: 60px; height: 60px; }
 .flow-doodle .ink-accent { fill: var(--flow-ink); fill-opacity: .09; }
 .flow-parallel, .flow-decisions { max-width: 600px; margin: 35px auto 0; padding-left: 60px; }
 .flow-section-label { display: flex; gap: 10px; align-items: baseline; font-size: 22px; }
@@ -90,19 +90,22 @@
  .flow-number { width: 44px; height: 44px; font-size: 22px; }
  .flow-connector { left: 5px; top: 57px; height: calc(100% - 72px); }
  .flow-doodle { width: 43px; height: 43px; right: -8px; top: 112px; opacity: .45; }
- .flow-step-4 .flow-doodle { width: 40px; height: 40px; }
+ .flow-step-4 > .flow-doodle:not(.flow-doodle-small) { width: 40px; height: 40px; }
  .flow-copy { font-size: 18px; } .flow-period { font-size: 15px; }
  .flow-parallel, .flow-decisions { padding-left: 15px; }
 }
 
-/* The complete inked spine and numbered nodes stay visible before the slower annotations. */
+/* Timeline labels and ink appear together; only the small drawings wait. */
 .flow-motion .flow-chain { animation: timeline-ink-in .32s ease-out both; }
 @keyframes timeline-ink-in { from { opacity: .2; } to { opacity: 1; } }
 .flow-doodle > svg { display: block; width: 100%; height: 100%; transform: translate3d(0, var(--parallax-y, 0px), 0) rotate(-7deg); will-change: transform; }
 .flow-step:nth-child(even) .flow-doodle > svg { transform: translate3d(0, var(--parallax-y, 0px), 0) rotate(7deg); }
-.flow-motion .flow-card > .flow-reveal { transition-duration: 1.2s, 1.35s; transition-delay: .35s; }
-.flow-motion .flow-card > .flow-copy { transition-delay: .5s; }
-.flow-motion .flow-card > .flow-period { transition-delay: .65s; }
 .flow-motion .flow-doodle.flow-reveal { transition-duration: 1.6s, 1.6s; transition-delay: .8s; }
 
-.flow-motion .flow-card:focus-visible > .flow-reveal { opacity: 1; transform: none; transition: none; }
+
+.flow-doodle-small { width: 24px; height: 24px; right: 80px; top: 86px; opacity: .5; }
+@media (max-width: 600px) {
+ .flow-step { padding-right: 58px; }
+ .flow-doodle, .flow-step-4 > .flow-doodle:not(.flow-doodle-small) { width: 36px; height: 36px; right: 0; top: 90px; }
+ .flow-doodle-small { width: 18px; height: 18px; right: 9px; top: 145px; }
+}

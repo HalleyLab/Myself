@@ -44,6 +44,9 @@ const beforeUnknown = selected;
 handleClick({target: {closest() {return {dataset: {flowTab: 'tab99'}};}}});
 assert.equal(selected, beforeUnknown, 'Unknown destinations must be ignored');
 assert.equal([...html.matchAll(/class="flow-doodle"/g)].length, 8, 'One small illustration for each of the eight stages');
+assert.equal([...html.matchAll(/class="flow-doodle flow-doodle-small"/g)].length, 8, 'Add small margin accents without crowding the timeline text');
+assert.ok(html.includes('<title>留学经验</title>'), 'Use the short page name in the browser tab');
+assert.ok(!html.includes('留学申请全流程') && !html.includes('留学篇'));
 const font = fs.readFileSync(path.join(root, 'fonts/application-hand.woff2'));
 assert.equal(font.subarray(0, 4).toString(), 'wOF2', 'The handwriting font must be a valid local webfont');
 assert.ok(font.length < 600000, 'Use a text-specific subset for the two pages instead of a full Chinese font');
@@ -86,6 +89,7 @@ function runMotion({reduced = false, supported = true} = {}) {
     const document = {body, addEventListener() {}, getElementById() {return overview;}, querySelectorAll(selector) {
         assert.ok(!/(^|,)\s*\.flow-step\s*(,|$)/.test(selector), 'Never hide an entire step with its timeline segment');
         assert.ok(!selector.includes('.flow-connector') && !selector.includes('.flow-card-top') && !selector.includes('.flow-number'), 'The timeline spine and numbers must appear before annotations');
+        assert.ok(!selector.includes('.flow-card'), 'Timeline titles, descriptions and dates must be visible with the line');
         assert.ok(selector.includes('.lab-notebook'), 'The laboratory notebook shares the text reveal');
         return [...steps, ...drawings, chapterParagraph, tallTimeline, labParagraph];
     }};
@@ -129,4 +133,4 @@ for (const page of [html, lab]) {
     assert.ok(page.includes('js/handwritten.js'));
 }
 assert.ok(fs.statSync(path.join(root, 'images/paper/parchment.webp')).size < 150000, 'Reuse one small paper texture');
-console.log('Timeline-first reveal, 8 drawings, both handwritten pages, preserved lab tables, navigation, parallax and reduced-motion fallback: passed');
+console.log('Immediate timeline labels, 16 small drawings, page naming, both handwritten pages, navigation, parallax and reduced-motion fallback: passed');

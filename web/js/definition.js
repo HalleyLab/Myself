@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const attrMemory = new WeakMap();
     const languageKey = 'siteLanguage';
     let titleMemory;
-    const translationScriptUrl = new URL('translations-en.js?v=20261012-final', document.querySelector('script[src*="/definition.js"]').src).href;
+    const translationScriptUrl = new URL('translations-en.js?v=20261028-controls', document.querySelector('script[src*="/definition.js"]').src).href;
     let translationLoadPromise = null;
     let languageChangeId = 0;
     let translationTerms;
@@ -79,6 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
         '\u4E8C\u4E09\u56DB\u8BFE\u5802': 'Second/Third/Fourth Classroom',
         '\u5B66\u4E60\u7B14\u8BB0': 'Study Notes',
         '\u7559\u5B66\u7BC7': 'Study Abroad',
+        '\u7559\u5B66\u7ECF\u9A8C': 'Study Abroad Experiences',
         '\u7533\u8BF7': 'Application',
         '\u5B9E\u9A8C\u624B\u518C': 'Lab Manual',
         '\u4F7F\u7528\u8BF4\u660E': 'Instructions',
@@ -279,6 +280,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const style = document.createElement('style');
         style.textContent = [
+            'header nav ul li a,header nav ul li.nav-group>.nav-group-title,header nav ul li.nav-group .nav-submenu a{font-weight:800!important}',
             '.language-switcher{position:fixed;top:20px;right:154px;z-index:1300;min-width:74px;height:40px;border:0;border-radius:22px;padding:0 16px;cursor:pointer;background:rgba(31,33,36,.92);color:#fff;font:700 14px/1 "Microsoft YaHei","PingFang SC",Arial,sans-serif;box-shadow:0 10px 24px rgba(0,0,0,.16);transition:transform .2s ease,opacity .2s ease,background .2s ease;animation:slideBottom 1s ease forwards}',
             '.theme-switcher{box-sizing:border-box;width:120px;min-width:120px;height:40px;padding:0 15px;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap}',
             '.language-switcher:hover{transform:translateY(-1px);background:rgba(10,12,14,.96)}',

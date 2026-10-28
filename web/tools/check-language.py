@@ -77,6 +77,7 @@ const uncovered = [...new Set(strings)].filter(text => /[\u3400-\u9fff\u3040-\u3
 assert.deepEqual(uncovered, [], 'Untranslated page, note or player text');
 assert.equal(context.translateText('  你好呀  '), '  Hello  ');
 assert.equal(context.translateText('Already English'), 'Already English');
+assert.equal(context.translateText('留学经验'), 'Study Abroad Experiences');
 assert.equal(context.translateText('0 门课程'), '0 courses');
 assert.equal(context.translateText('1 门课程'), '1 course');
 assert.equal(context.translateText('33 门课程'), '33 courses');

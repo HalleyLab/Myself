@@ -5069,3 +5069,5 @@ window.siteEnglishTranslations = Object.freeze({
 window.siteEnglishTranslations = Object.freeze(Object.assign({}, window.siteEnglishTranslations, {
   "重新整理。原文档的一级标题被整理为左侧分类，二级标题被整理为可展开的章节，三级和四级标题保留为页内小节。": "The document’s top-level headings form the categories on the left; second-level headings become expandable chapters, while third- and fourth-level headings remain subsections on the page."
 }));
+
+window.siteEnglishTranslations = Object.freeze(Object.assign({}, window.siteEnglishTranslations, {"留学经验":"Study Abroad Experiences"}));
