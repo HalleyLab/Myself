@@ -1,5 +1,5 @@
 Application Hand is a text subset of LXGW WenKai TC, distributed under the SIL Open Font License 1.1.
 Source: https://github.com/google/fonts/tree/main/ofl/lxgwwenkaitc
-Subset generated for apply.html, protocols.html, controls and translations on 2026-10-28 with FontTools and Node.js Brotli.
-All required letters, Chinese characters and digits checked against the subset cmap.
-1711 characters; 424520 bytes.
+Subset generated for apply.html, protocols.html, dynamic controls, playlist names and translations on 2026-10-28 with FontTools and Node.js Brotli.
+All required Chinese, Japanese and Latin letters and digits checked against the subset cmap.
+1747 characters; 431036 bytes.

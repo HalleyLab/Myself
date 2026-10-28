@@ -1,4 +1,4 @@
-@font-face { font-family: "Application Hand"; src: url("../fonts/application-hand.woff2?v=20261028-paper") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Application Hand"; src: url("../fonts/application-hand.woff2?v=20261028-lab-hand") format("woff2"); font-weight: 400; font-display: swap; }
 /* Shared handwriting; neutral paper for study abroad and parchment for the laboratory. */
 body.handwritten-page {
  --guide-paper: #f4f5f6; --guide-rule: #c5d0d3; --flow-ink: #2a5058; --flow-muted: #52636c;
